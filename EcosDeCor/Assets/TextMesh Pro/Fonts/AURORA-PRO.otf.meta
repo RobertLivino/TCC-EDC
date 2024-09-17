@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: d62796de0986b7a45b7e3b941398928c
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - AURORA
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 82564b666660f4d4295491f3a7590597, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
