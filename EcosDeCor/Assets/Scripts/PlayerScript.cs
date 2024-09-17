@@ -10,6 +10,8 @@ public class PlayerScript : MonoBehaviour
     private float moveSpeed = 12f;
     private float gravity = -19.81f;
 
+    private Animator animator;
+
     Vector3 velocity;
 
     public Transform groundCheck;
@@ -22,7 +24,7 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -43,6 +45,14 @@ public class PlayerScript : MonoBehaviour
 
         Vector3 move =  new Vector3(x, 0, 0);
         controller.Move(move * moveSpeed * Time.deltaTime);
+        if(x != 0)
+        {
+            animator.SetBool("move", true);
+        }
+        else
+        {
+            animator.SetBool("move", false);
+        }
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
