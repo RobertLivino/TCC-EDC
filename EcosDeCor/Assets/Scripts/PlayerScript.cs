@@ -15,7 +15,7 @@ public class PlayerScript : MonoBehaviour
     Vector3 velocity;
 
     public Transform groundCheck;
-    private float groundDistance = 0.4f;
+    private float groundDistance = 0.1f;
     public LayerMask groundMask;
     bool isGrounded;
     private float jumpHeight = 3f;
@@ -45,7 +45,17 @@ public class PlayerScript : MonoBehaviour
 
         Vector3 move =  new Vector3(x, 0, 0);
         controller.Move(move * moveSpeed * Time.deltaTime);
-        if(x != 0)
+
+        if (x < 0 && transform.rotation.y != -90)
+        {
+            transform.rotation = Quaternion.Euler(0, -90, 0);
+        }
+        if (x > 0 && transform.rotation.y != 90)
+        {
+            transform.rotation = Quaternion.Euler(0, 90, 0);
+        }
+
+        if (x != 0 && isGrounded)
         {
             animator.SetBool("move", true);
         }
@@ -62,5 +72,10 @@ public class PlayerScript : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    private void FixedUpdate()
+    {
+        
     }
 }
