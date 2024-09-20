@@ -15,7 +15,7 @@ public class PlayerScript : MonoBehaviour
     Vector3 velocity;
 
     public Transform groundCheck;
-    private float groundDistance = 0.1f;
+    private float groundDistance = 0.4f;
     public LayerMask groundMask;
     bool isGrounded;
     private float jumpHeight = 3f;
@@ -32,10 +32,10 @@ public class PlayerScript : MonoBehaviour
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
-        //if (isGrounded && velocity.y < 0)
-        //{
-        //    velocity.y = -2f;
-        //}
+        if (isGrounded && velocity.y < 0)
+        {
+            velocity.y = -2f;
+        }
 
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
@@ -74,8 +74,8 @@ public class PlayerScript : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
     }
 
-    private void FixedUpdate()
+    private void OnDrawGizmos()
     {
-        
+        Gizmos.DrawWireSphere(groundCheck.position, groundDistance);
     }
 }
