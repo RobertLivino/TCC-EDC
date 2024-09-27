@@ -76,13 +76,18 @@ public class PlayerScript : MonoBehaviour
         {
             animator.SetInteger("jumpState", 0);
         }
-        if (!isGrounded)
+        if (!isGrounded && animator.GetInteger("jumpState") != 2)
         {
-            animator.SetInteger("jumpState", 1);
+            animator.SetInteger("jumpState", 2);
         }
     }
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(groundCheck.position, groundDistance);
+    }
+
+    private void OnFinishedAscend()
+    {
+        animator.SetTrigger("jumpAscendFinished");
     }
 }
