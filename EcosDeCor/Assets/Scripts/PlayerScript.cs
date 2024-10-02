@@ -38,13 +38,17 @@ public class PlayerScript : MonoBehaviour
         lookDown = y < 0 ? true : false;
 
         Vector3 move =  new Vector3(x, 0, 0);
+        //if (!animator.GetBool("Attack"))
+        //{
+        //    controller.Move(move * moveSpeed * Time.deltaTime);
+        //}
         controller.Move(move * moveSpeed * Time.deltaTime);
 
-        if (x < 0 && transform.rotation.y != -90)
+        if (x < 0 && transform.rotation.y != -90 && !animator.GetBool("Attack"))
         {
             transform.rotation = Quaternion.Euler(0, -90, 0);
         }
-        if (x > 0 && transform.rotation.y != 90)
+        if (x > 0 && transform.rotation.y != 90 && !animator.GetBool("Attack"))
         {
             transform.rotation = Quaternion.Euler(0, 90, 0);
         }
@@ -63,6 +67,11 @@ public class PlayerScript : MonoBehaviour
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
+        if (Input.GetKeyDown(KeyCode.K) && !animator.GetBool("Attack"))
+        {
+            animator.SetBool("Attack", true);
+        }
+
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
@@ -71,6 +80,7 @@ public class PlayerScript : MonoBehaviour
     private void FixedUpdate()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        animator.SetBool("IsGrounded", isGrounded);
 
         if (isGrounded && velocity.y < 0)
         {
@@ -80,6 +90,7 @@ public class PlayerScript : MonoBehaviour
         {
             animator.SetInteger("jumpState", 2);
         }
+
     }
     private void OnDrawGizmos()
     {
@@ -89,5 +100,9 @@ public class PlayerScript : MonoBehaviour
     private void OnFinishedAscend()
     {
         animator.SetTrigger("jumpAscendFinished");
+    }
+    private void OnFinishedAttack()
+    {
+        animator.SetBool("Attack", false);
     }
 }

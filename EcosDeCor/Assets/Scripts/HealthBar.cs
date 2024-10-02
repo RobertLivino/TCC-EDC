@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
@@ -19,7 +20,8 @@ public class HealthBar : MonoBehaviour
     {
         if (currentHealth < 0)
         {
-            Application.LoadLevel(Application.loadedLevel);
+            //Application.LoadLevel(Application.loadedLevel);
+            SceneManager.LoadScene("SampleScene");
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
