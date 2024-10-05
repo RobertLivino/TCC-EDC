@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CinemachineTarget
   - Ground
+  - EnemyCrab
   layers:
   - Default
   - TransparentFX

@@ -11,10 +11,14 @@ public class PlayerScript : MonoBehaviour
     private float moveSpeed = 12f;
     private float gravity = -9.81f;
 
+    public HealthBar healthBar;
+
     private Animator animator;
+    public bool attackAnimation;
+    public bool hittedOnce;
+    public float swordDamage = 1;
 
     Vector3 velocity;
-
     public Transform groundCheck;
     private float groundDistance = 0.4f;
     public LayerMask groundMask;
@@ -26,6 +30,7 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        healthBar.FillHealthStart(5f);
     }
 
     // Update is called once per frame
@@ -36,12 +41,9 @@ public class PlayerScript : MonoBehaviour
 
         lookUp = y > 0 ? true : false;
         lookDown = y < 0 ? true : false;
+        Debug.Log(x);
 
         Vector3 move =  new Vector3(x, 0, 0);
-        //if (!animator.GetBool("Attack"))
-        //{
-        //    controller.Move(move * moveSpeed * Time.deltaTime);
-        //}
         controller.Move(move * moveSpeed * Time.deltaTime);
 
         if (x < 0 && transform.rotation.y != -90 && !animator.GetBool("Attack"))
@@ -79,6 +81,12 @@ public class PlayerScript : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (transform.position.z != -1.3)
+        {
+            //transform.position.z = 1.3;
+            transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y, -1.3f), transform.rotation);
+        }
+        attackAnimation = animator.GetBool("Attack");
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         animator.SetBool("IsGrounded", isGrounded);
 
@@ -92,6 +100,13 @@ public class PlayerScript : MonoBehaviour
         }
 
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //controller.move();
+    }
+
+    //metodo para visualizar colizões especificas
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(groundCheck.position, groundDistance);
@@ -104,5 +119,13 @@ public class PlayerScript : MonoBehaviour
     private void OnFinishedAttack()
     {
         animator.SetBool("Attack", false);
+    }
+    private void OnHitted()
+    {
+        hittedOnce = true;
+    }
+    private void OnFinishHit()
+    {
+        hittedOnce = false;
     }
 }

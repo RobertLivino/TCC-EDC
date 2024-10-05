@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
     public Image healthBar;
-    public float maxHealth = 5f;
-    private float currentHealth;
+    public float maxHealth;
+    public float currentHealth;
 
     void Start()
     {
@@ -18,19 +18,11 @@ public class HealthBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentHealth < 0)
-        {
-            //Application.LoadLevel(Application.loadedLevel);
-            SceneManager.LoadScene("SampleScene");
-        }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            TakeDamage(1);
-        }
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            HealDamage(1);
-        }
+    }
+    public void FillHealthStart(float update)
+    {
+        maxHealth = update;
+        currentHealth = maxHealth;
     }
     public void TakeDamage(float damage)
     {
