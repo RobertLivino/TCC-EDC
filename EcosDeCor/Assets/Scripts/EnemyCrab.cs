@@ -10,7 +10,7 @@ public class EnemyCrab : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        healthBar.FillHealthStart(2f);
+        healthBar.FillHealthStart(4f);
     }
 
     // Update is called once per frame
@@ -23,10 +23,9 @@ public class EnemyCrab : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (playerSword.enterAttack && other.tag == "Player")
+        if (playerSword.playerScript.hittedOnce && other.tag == "Player")
         {
             healthBar.TakeDamage(playerSword.playerScript.swordDamage);
-            playerSword.enterAttack = false;
         }
     }
 }

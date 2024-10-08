@@ -33,7 +33,6 @@ public class HealthBar : MonoBehaviour
     public void HealDamage(float heal)
     {
         currentHealth += heal;
-        //currentHealth = Mathf.Clamp(heal, 0, maxHealth);
 
         healthBar.fillAmount = currentHealth / maxHealth;
     }

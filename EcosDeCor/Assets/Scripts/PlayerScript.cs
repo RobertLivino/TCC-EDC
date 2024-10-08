@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -14,10 +16,11 @@ public class PlayerScript : MonoBehaviour
     private float y;
 
     private bool knockUpCountdown = false;
-    private float startKnockUpCountdown = 2f;
-    private float currentKnockUpCountdown = 2f;
+    private float startKnockUpCountdown = 0.5f;
+    private float currentKnockUpCountdown = 0.5f;
 
     public HealthBar healthBar;
+    public PlayerSword playerSword;
 
     private Animator animator;
     public bool attackAnimation;
@@ -49,18 +52,21 @@ public class PlayerScript : MonoBehaviour
         lookDown = y < 0 ? true : false;
 
         Vector3 move = new Vector3(x, 0, 0);
-        controller.Move(move * moveSpeed * Time.deltaTime);
+        if (!knockUpCountdown) 
+        {
+            controller.Move(move * moveSpeed * Time.deltaTime);
+        }
 
-        if (x < 0 && transform.rotation.y != -90 && !animator.GetBool("Attack"))
+        if (x < 0 && transform.rotation.y != -90 && !animator.GetBool("Attack") && !knockUpCountdown)
         {
             transform.rotation = Quaternion.Euler(0, -90, 0);
         }
-        if (x > 0 && transform.rotation.y != 90 && !animator.GetBool("Attack"))
+        if (x > 0 && transform.rotation.y != 90 && !animator.GetBool("Attack") && !knockUpCountdown)
         {
             transform.rotation = Quaternion.Euler(0, 90, 0);
         }
 
-        if (x != 0 && isGrounded)
+        if (x != 0 && isGrounded && !knockUpCountdown)
         {
             animator.SetBool("move", true);
         }
@@ -86,14 +92,13 @@ public class PlayerScript : MonoBehaviour
         if (knockUpCountdown && currentKnockUpCountdown > 0)
         {
             currentKnockUpCountdown -= 1 * Time.deltaTime;
-            controller.Move(new Vector3(-0.5f, 0.5f, 0) * 12f * Time.deltaTime);
-            Debug.Log(currentKnockUpCountdown);
+            controller.Move(new Vector3(transform.rotation.y < 0 ? 0.5f : -0.5f, 0, 0) * 12f * Time.deltaTime);
         }
         if (currentKnockUpCountdown < 0)
         {
             currentKnockUpCountdown = startKnockUpCountdown;
             knockUpCountdown = false;
-            Debug.ClearDeveloperConsole();
+            animator.SetBool("knockBack", false);
         }
     }
 
@@ -120,9 +125,23 @@ public class PlayerScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "EnemyCrab")
+        if (other.gameObject.tag == "EnemyCrab" && !attackAnimation)
         {
+            if (other.transform.position.x > transform.position.x)
+            {
+                transform.rotation = Quaternion.Euler(0, 90, 0);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0, -90, 0);
+            }
             knockUpCountdown = true;
+            animator.SetBool("knockBack", true);
+            healthBar.TakeDamage(1);
+            if (healthBar.currentHealth <= 0)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
         }
     }
     private void OnDrawGizmos()
