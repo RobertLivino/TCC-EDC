@@ -10,6 +10,12 @@ public class PlayerScript : MonoBehaviour
     private bool lookDown;
     private float moveSpeed = 12f;
     private float gravity = -9.81f;
+    private float x;
+    private float y;
+
+    private bool knockUpCountdown = false;
+    private float startKnockUpCountdown = 2f;
+    private float currentKnockUpCountdown = 2f;
 
     public HealthBar healthBar;
 
@@ -36,14 +42,14 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float x = Input.GetAxis("Horizontal");
-        float y = Input.GetAxis("Vertical");
+        x = Input.GetAxis("Horizontal");
+        y = Input.GetAxis("Vertical");
 
         lookUp = y > 0 ? true : false;
         lookDown = y < 0 ? true : false;
-        Debug.Log(x);
+        //Debug.Log(x);
 
-        Vector3 move =  new Vector3(x, 0, 0);
+        Vector3 move = new Vector3(x, 0, 0);
         controller.Move(move * moveSpeed * Time.deltaTime);
 
         if (x < 0 && transform.rotation.y != -90 && !animator.GetBool("Attack"))
@@ -77,6 +83,19 @@ public class PlayerScript : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
+
+        if (knockUpCountdown && currentKnockUpCountdown > 0)
+        {
+            currentKnockUpCountdown -= 1 * Time.deltaTime;
+            controller.Move(new Vector3(-0.5f, 0.5f, 0) * 12f * Time.deltaTime);
+            Debug.Log(currentKnockUpCountdown);
+        }
+        if (currentKnockUpCountdown < 0)
+        {
+            currentKnockUpCountdown = startKnockUpCountdown;
+            knockUpCountdown = false;
+            Debug.ClearDeveloperConsole();
+        }
     }
 
     private void FixedUpdate()
@@ -103,10 +122,14 @@ public class PlayerScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //controller.move();
+        if (other.gameObject.tag == "EnemyCrab")
+        {
+            knockUpCountdown = true;
+        }
+        //controller.Move(new Vector3(3, 3, 0) * 12f * Time.deltaTime);
     }
 
-    //metodo para visualizar colizões especificas
+    //metodo para visualizar colizï¿½es especificas
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(groundCheck.position, groundDistance);
