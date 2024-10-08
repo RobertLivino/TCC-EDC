@@ -47,7 +47,6 @@ public class PlayerScript : MonoBehaviour
 
         lookUp = y > 0 ? true : false;
         lookDown = y < 0 ? true : false;
-        //Debug.Log(x);
 
         Vector3 move = new Vector3(x, 0, 0);
         controller.Move(move * moveSpeed * Time.deltaTime);
@@ -102,7 +101,6 @@ public class PlayerScript : MonoBehaviour
     {
         if (transform.position.z != -1.3)
         {
-            //transform.position.z = 1.3;
             transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y, -1.3f), transform.rotation);
         }
         attackAnimation = animator.GetBool("Attack");
@@ -126,10 +124,7 @@ public class PlayerScript : MonoBehaviour
         {
             knockUpCountdown = true;
         }
-        //controller.Move(new Vector3(3, 3, 0) * 12f * Time.deltaTime);
     }
-
-    //metodo para visualizar coliz�es especificas
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(groundCheck.position, groundDistance);
