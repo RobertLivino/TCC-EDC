@@ -80,9 +80,13 @@ public class PlayerScript : MonoBehaviour
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
-        if (Input.GetKeyDown(KeyCode.K) && !animator.GetBool("Attack"))
+        if (Input.GetKeyDown(KeyCode.K) && !animator.GetBool("Attack") && !animator.GetBool("Spell"))
         {
             animator.SetBool("Attack", true);
+        }
+        if (Input.GetKeyDown(KeyCode.J) && !animator.GetBool("Attack") && !animator.GetBool("Spell"))
+        {
+            animator.SetBool("Spell", true);
         }
 
         velocity.y += gravity * Time.deltaTime;
@@ -164,5 +168,9 @@ public class PlayerScript : MonoBehaviour
     private void OnFinishHit()
     {
         hittedOnce = false;
+    }
+    private void OnFinishSpell()
+    {
+        animator.SetBool("Spell", false);
     }
 }
