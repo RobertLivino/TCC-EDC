@@ -27,6 +27,12 @@ public class PlayerScript : MonoBehaviour
     public bool hittedOnce;
     public float swordDamage = 1;
 
+    public GameObject SpellPointCast;
+    public Vector3 SpellDestination;
+    public GameObject spellToCast;
+    public float spellSpeed;
+
+
     Vector3 velocity;
     public Transform groundCheck;
     private float groundDistance = 0.4f;
@@ -57,11 +63,11 @@ public class PlayerScript : MonoBehaviour
             controller.Move(move * moveSpeed * Time.deltaTime);
         }
 
-        if (x < 0 && transform.rotation.y != -90 && !animator.GetBool("Attack") && !knockUpCountdown)
+        if (x < 0 && transform.rotation.y != -90 && !animator.GetBool("Attack") && !knockUpCountdown && !animator.GetBool("Spell"))
         {
             transform.rotation = Quaternion.Euler(0, -90, 0);
         }
-        if (x > 0 && transform.rotation.y != 90 && !animator.GetBool("Attack") && !knockUpCountdown)
+        if (x > 0 && transform.rotation.y != 90 && !animator.GetBool("Attack") && !knockUpCountdown && !animator.GetBool("Spell"))
         {
             transform.rotation = Quaternion.Euler(0, 90, 0);
         }
@@ -124,7 +130,6 @@ public class PlayerScript : MonoBehaviour
         {
             animator.SetInteger("jumpState", 2);
         }
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -172,5 +177,10 @@ public class PlayerScript : MonoBehaviour
     private void OnFinishSpell()
     {
         animator.SetBool("Spell", false);
+    }
+    private void OnCastSpell()
+    {
+        var SpellObj = Instantiate(spellToCast, SpellPointCast.transform.position, Quaternion.identity) as GameObject;
+        SpellObj.GetComponent<Rigidbody>().velocity = SpellPointCast.transform.forward.normalized * spellSpeed;
     }
 }
