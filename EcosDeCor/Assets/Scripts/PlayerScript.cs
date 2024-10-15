@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -20,6 +21,7 @@ public class PlayerScript : MonoBehaviour
     private float currentKnockUpCountdown = 0.5f;
 
     public HealthBar healthBar;
+    public ManaBar manaBar;
     public PlayerSword playerSword;
 
     private Animator animator;
@@ -31,7 +33,7 @@ public class PlayerScript : MonoBehaviour
     public Vector3 SpellDestination;
     public GameObject spellToCast;
     public float spellSpeed;
-
+    public float spellDamage = 2;
 
     Vector3 velocity;
     public Transform groundCheck;
@@ -46,6 +48,9 @@ public class PlayerScript : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         healthBar.FillHealthStart(5f);
+        manaBar.FillManaStart(50f);
+        spellDamage = 2f;
+        swordDamage = 1f;
     }
 
     // Update is called once per frame
@@ -54,62 +59,36 @@ public class PlayerScript : MonoBehaviour
         x = Input.GetAxis("Horizontal");
         y = Input.GetAxis("Vertical");
 
-        lookUp = y > 0 ? true : false;
-        lookDown = y < 0 ? true : false;
+        //lookUp = y > 0 ? true : false;
+        //lookDown = y < 0 ? true : false;
 
-        Vector3 move = new Vector3(x, 0, 0);
-        if (!knockUpCountdown) 
-        {
-            MovePlayer(move);
-        }
+        MovePlayer();
 
-        if (x < 0 && transform.rotation.y != -90 && !animator.GetBool("Attack") && !knockUpCountdown && !animator.GetBool("Spell"))
+        if (isPlayerInAction() && !knockUpCountdown)
         {
-            transform.rotation = Quaternion.Euler(0, -90, 0);
-        }
-        if (x > 0 && transform.rotation.y != 90 && !animator.GetBool("Attack") && !knockUpCountdown && !animator.GetBool("Spell"))
-        {
-            transform.rotation = Quaternion.Euler(0, 90, 0);
+            RotatePlayer();
         }
 
-        if (x != 0 && isGrounded && !knockUpCountdown)
+        if (Input.GetButtonDown("Jump"))
         {
-            animator.SetBool("move", true);
-        }
-        else
-        {
-            animator.SetBool("move", false);
+            JumpPlayer();
         }
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetKeyDown(KeyCode.K))
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            PlayerAttack();
+        }
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            PlayerCastSpell();
         }
 
-        if (Input.GetKeyDown(KeyCode.K) && !animator.GetBool("Attack") && !animator.GetBool("Spell"))
+        if (knockUpCountdown)
         {
-            animator.SetBool("Attack", true);
-        }
-        if (Input.GetKeyDown(KeyCode.J) && !animator.GetBool("Attack") && !animator.GetBool("Spell"))
-        {
-            animator.SetBool("Spell", true);
+            UpdateKnockUpCountdown();
         }
 
-        velocity.y += gravity * Time.deltaTime;
-
-        controller.Move(velocity * Time.deltaTime);
-
-        if (knockUpCountdown && currentKnockUpCountdown > 0)
-        {
-            currentKnockUpCountdown -= 1 * Time.deltaTime;
-            controller.Move(new Vector3(transform.rotation.y < 0 ? 0.5f : -0.5f, 0, 0) * 12f * Time.deltaTime);
-        }
-        if (currentKnockUpCountdown < 0)
-        {
-            currentKnockUpCountdown = startKnockUpCountdown;
-            knockUpCountdown = false;
-            animator.SetBool("knockBack", false);
-        }
+        UpdateGravity();        
     }
 
     private void FixedUpdate()
@@ -182,5 +161,85 @@ public class PlayerScript : MonoBehaviour
     {
         var SpellObj = Instantiate(spellToCast, SpellPointCast.transform.position, Quaternion.identity) as GameObject;
         SpellObj.GetComponent<Rigidbody>().velocity = SpellPointCast.transform.forward.normalized * spellSpeed;
+        Destroy(SpellObj, 15f);
+    }
+
+    private void RotatePlayer()
+    {
+        if (x < 0 && transform.rotation.y != -90)
+        {
+            transform.rotation = Quaternion.Euler(0, -90, 0);
+        }
+        if (x > 0 && transform.rotation.y != 90)
+        {
+            transform.rotation = Quaternion.Euler(0, 90, 0);
+        }
+    }
+    private void MovePlayer()
+    {
+        Vector3 move = new Vector3(x, 0, 0);
+        if (!knockUpCountdown)
+        {
+            controller.Move(move * moveSpeed * Time.deltaTime);
+        }
+
+        moveSpeed = isGrounded ? 12f : 10f;
+        if (x != 0 && isGrounded)
+        {
+            animator.SetBool("move", true);
+        }
+        else
+        {
+            animator.SetBool("move", false);
+        }
+    }
+    private void JumpPlayer()
+    {
+        if (isGrounded)
+        {
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
+    }
+    private void PlayerAttack()
+    {
+        if (isPlayerInAction())
+        {
+            animator.SetBool("Attack", true);
+        }
+    }
+    private void PlayerCastSpell()
+    {
+        if (isPlayerInAction())
+        {
+            manaBar.useMana(10f);
+            animator.SetBool("Spell", true);
+        }
+    }
+    private void UpdateGravity()
+    {
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime);
+    }
+    private void UpdateKnockUpCountdown()
+    {
+        if (currentKnockUpCountdown > 0)
+        {
+            currentKnockUpCountdown -= 1 * Time.deltaTime;
+            controller.Move(new Vector3(transform.rotation.y < 0 ? 0.5f : -0.5f, 0, 0) * 12f * Time.deltaTime);
+        }
+        else
+        {
+            currentKnockUpCountdown = startKnockUpCountdown;
+            knockUpCountdown = false;
+            animator.SetBool("knockBack", false);
+        }
+    }
+    private bool isPlayerInAction()
+    {
+        if(!animator.GetBool("Attack") && !animator.GetBool("Spell"))
+        {
+            return true;
+        }
+        return false;
     }
 }

@@ -27,5 +27,9 @@ public class EnemyCrab : MonoBehaviour
         {
             healthBar.TakeDamage(playerSword.playerScript.swordDamage);
         }
+        if (other.tag == "Spell")
+        {
+            healthBar.TakeDamage(playerSword.playerScript.spellDamage);
+        }
     }
 }
