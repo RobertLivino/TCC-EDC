@@ -111,9 +111,6 @@ public class PlayerScript : MonoBehaviour
         {
             animator.SetInteger("jumpState", 2);
         }
-
-        Ray raycastHead = new Ray(transform.position, transform.up);
-        Debug.DrawRay(headCheack.position, headCheack.up, Color.red);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -227,6 +224,11 @@ public class PlayerScript : MonoBehaviour
             velocity.y = -2;
         }
         velocity.y += gravity * Time.deltaTime;
+        //Debug.DrawRay(headCheack.position, headCheack.up * 0.1f, Color.red);
+        if (Physics.Raycast(headCheack.position, headCheack.up, 0.1f))
+        {
+            velocity.y = -0.5f;
+        }
         controller.Move(velocity * Time.deltaTime);
     }
     private void UpdateKnockUpCountdown()
