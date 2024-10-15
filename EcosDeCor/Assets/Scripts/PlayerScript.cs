@@ -60,7 +60,7 @@ public class PlayerScript : MonoBehaviour
         Vector3 move = new Vector3(x, 0, 0);
         if (!knockUpCountdown) 
         {
-            controller.Move(move * moveSpeed * Time.deltaTime);
+            MovePlayer(move);
         }
 
         if (x < 0 && transform.rotation.y != -90 && !animator.GetBool("Attack") && !knockUpCountdown && !animator.GetBool("Spell"))
