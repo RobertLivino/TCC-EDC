@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
@@ -17,7 +18,7 @@ public class PlayerScript : MonoBehaviour
     private float y;
 
     private bool knockUpCountdown = false;
-    private float startKnockUpCountdown = 0.5f;
+    private float startKnockUpCountdown = 0.2f;
     private float currentKnockUpCountdown = 0.5f;
 
     public HealthBar healthBar;
@@ -36,11 +37,12 @@ public class PlayerScript : MonoBehaviour
     public float spellDamage = 2;
 
     Vector3 velocity;
+    public Transform headCheack;
     public Transform groundCheck;
-    private float groundDistance = 0.4f;
+    private float groundDistance = 0.5f;
     public LayerMask groundMask;
     bool isGrounded;
-    private float jumpHeight = 3f;
+    private float jumpHeight = 5f;
 
     public CharacterController controller;
     // Start is called before the first frame update
@@ -109,6 +111,9 @@ public class PlayerScript : MonoBehaviour
         {
             animator.SetInteger("jumpState", 2);
         }
+
+        Ray raycastHead = new Ray(transform.position, transform.up);
+        Debug.DrawRay(headCheack.position, headCheack.up, Color.red);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -217,6 +222,10 @@ public class PlayerScript : MonoBehaviour
     }
     private void UpdateGravity()
     {
+        if (isGrounded && velocity.y < 0)
+        {
+            velocity.y = -2;
+        }
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
     }
