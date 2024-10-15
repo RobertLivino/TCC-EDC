@@ -17,14 +17,12 @@ public class ManaBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.L))
-        //{
-        //    useMana(10);
-        //}
-        //if (Input.GetKeyDown(KeyCode.K))
-        //{
-        //    HealMana(10);
-        //}
+    }
+
+    public void FillManaStart(float update)
+    {
+        maxMana = update;
+        currentMana = maxMana;
     }
     public void useMana(float damage)
     {
