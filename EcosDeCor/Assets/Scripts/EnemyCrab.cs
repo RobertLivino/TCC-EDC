@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class EnemyCrab : MonoBehaviour
 {
-    public PlayerSword playerSword;
+    public PlayerScript playerScript;
+    public MapaController mapaController;
     public HealthBar healthBar;
     public bool fill;
     // Start is called before the first frame update
@@ -18,18 +19,22 @@ public class EnemyCrab : MonoBehaviour
     {
         if (healthBar.currentHealth <= 0)
         {
+            mapaController.healthMana = true;
+            mapaController.healthManaValue = 10f;
+            mapaController.healthHealt = true;
+            mapaController.healthHealtValue = 1f;
             Destroy(gameObject);
         }
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (playerSword.playerScript.hittedOnce && other.tag == "Player")
+        if (other.tag == "Player")
         {
-            healthBar.TakeDamage(playerSword.playerScript.swordDamage);
+            healthBar.TakeDamage(playerScript.swordDamage);
         }
         if (other.tag == "Spell")
         {
-            healthBar.TakeDamage(playerSword.playerScript.spellDamage);
+            healthBar.TakeDamage(playerScript.spellDamage);
         }
     }
 }
