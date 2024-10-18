@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ManaBar : MonoBehaviour
 {
     public Image manaBar;
-    public float maxMana = 100f;
+    public float maxMana;
     private float currentMana;
 
     void Start()

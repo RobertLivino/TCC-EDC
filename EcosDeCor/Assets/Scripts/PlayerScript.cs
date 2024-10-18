@@ -10,6 +10,8 @@ using UnityEngine.UIElements;
 
 public class PlayerScript : MonoBehaviour
 {
+    public MapaController mapaController;
+
     private bool lookUp;
     private bool lookDown;
     private float moveSpeed = 12f;
@@ -88,6 +90,15 @@ public class PlayerScript : MonoBehaviour
         if (knockUpCountdown)
         {
             UpdateKnockUpCountdown();
+        }
+
+        if (mapaController.healthMana)
+        {
+            HealManaByEnemy(mapaController.healthManaValue);
+        }
+        if (mapaController.healthHealt)
+        {
+            HealHealthByEnemy(mapaController.healthHealtValue);
         }
 
         UpdateGravity();        
@@ -252,5 +263,15 @@ public class PlayerScript : MonoBehaviour
             return true;
         }
         return false;
+    }
+    public void HealManaByEnemy(float heal) 
+    {
+        mapaController.healthMana = false;
+        manaBar.HealMana(heal);
+    }
+    public void HealHealthByEnemy(float heal) 
+    {
+        mapaController.healthHealt = false;
+        healthBar.HealDamage(heal);
     }
 }
