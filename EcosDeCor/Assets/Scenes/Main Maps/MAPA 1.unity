@@ -27737,6 +27737,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cristal de memoria
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ed93435d69cc078428f02165962384e0, type: 3}
+      propertyPath: m_TagString
+      value: Memory
+      objectReference: {fileID: 0}
     - target: {fileID: 4083501151425157549, guid: ed93435d69cc078428f02165962384e0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.7800007
@@ -38425,6 +38429,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!65 &2093911504
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2093911500}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.350252, y: 4.2261467, z: 1}
+  m_Center: {x: -1.7836313, y: 0.018348694, z: 0}
 --- !u!1 &2105577879
 GameObject:
   m_ObjectHideFlags: 0
