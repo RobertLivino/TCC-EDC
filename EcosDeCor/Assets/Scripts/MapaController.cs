@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class MapaController : MonoBehaviour
@@ -9,14 +10,17 @@ public class MapaController : MonoBehaviour
     public float healthManaValue;
     public bool healthHealt;
     public float healthHealtValue;
+    public float memoriesColected;
+    public TextMeshProUGUI memoriesCristalColected;
     void Start()
     {
         healthMana = false;
+        memoriesColected = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        memoriesCristalColected.text = memoriesColected.ToString();
     }
 }

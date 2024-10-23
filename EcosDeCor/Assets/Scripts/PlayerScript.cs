@@ -144,6 +144,11 @@ public class PlayerScript : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
         }
+
+        if(other.gameObject.tag == "Memory")
+        {
+            mapaController.memoriesColected += 1;
+        }
     }
     private void OnDrawGizmos()
     {
