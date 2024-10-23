@@ -1155,6 +1155,7 @@ GameObject:
   - component: {fileID: 6184346670920445141}
   - component: {fileID: 6184346670920445148}
   - component: {fileID: 6184346670920445140}
+  - component: {fileID: 3747253602261133639}
   m_Layer: 0
   m_Name: CarangueijoSemCor
   m_TagString: EnemyCrab
@@ -1261,8 +1262,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerScript: {fileID: 1917072531669085499, guid: 881b5ba42314ce747bcbd2c641f5b60a, type: 3}
+  mapaController: {fileID: 0}
   healthBar: {fileID: 6184346669404215785}
   fill: 0
+--- !u!135 &3747253602261133639
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6418297242399543688}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6796084987740961092
 GameObject:
   m_ObjectHideFlags: 0

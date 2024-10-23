@@ -78,11 +78,11 @@ public class PlayerScript : MonoBehaviour
             JumpPlayer();
         }
 
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.J))
         {
             PlayerAttack();
         }
-        if (Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKeyDown(KeyCode.K))
         {
             PlayerCastSpell();
         }
