@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpellScript : MonoBehaviour
+public class MemoryScript : MonoBehaviour
 {
-
-    public PlayerScript PlayerScript;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,5 +14,9 @@ public class SpellScript : MonoBehaviour
     void Update()
     {
         
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        Destroy(gameObject);
     }
 }
