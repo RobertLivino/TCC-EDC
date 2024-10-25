@@ -9,6 +9,8 @@ public class EnemyCrab : MonoBehaviour
     public MapaController mapaController;
     public HealthBar healthBar;
     public Transform visao;
+    public NavMeshAgent agent;
+    public LayerMask playerLayerMask;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +27,12 @@ public class EnemyCrab : MonoBehaviour
             mapaController.healthHealt = true;
             mapaController.healthHealtValue = 1f;
             Destroy(gameObject);
+        }
+        Ray ray = new Ray(visao.transform.position, visao.transform.forward);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 5,playerLayerMask))
+        {
+            Debug.Log("Player");
         }
     }
     private void OnTriggerEnter(Collider other)
