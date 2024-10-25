@@ -28,10 +28,9 @@ public class EnemyCrab : MonoBehaviour
             mapaController.healthHealtValue = 1f;
             Destroy(gameObject);
         }
-        //Debug.DrawRay(visao.transform.position, visao.transform.forward);
         Ray ray = new Ray(visao.transform.position, visao.transform.forward);
-        Debug.DrawRay(ray.origin, ray.direction);
-        if (Physics.Raycast(ray, 0, playerLayerMask))
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 5,playerLayerMask))
         {
             Debug.Log("Player");
         }
