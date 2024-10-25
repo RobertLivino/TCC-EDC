@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyCrab : MonoBehaviour
 {
     public PlayerScript playerScript;
     public MapaController mapaController;
     public HealthBar healthBar;
-    public bool fill;
+    public Transform visao;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +29,7 @@ public class EnemyCrab : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Sword")
         {
             healthBar.TakeDamage(playerScript.swordDamage);
         }

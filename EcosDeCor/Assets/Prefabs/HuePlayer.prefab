@@ -2249,6 +2249,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Espada
       objectReference: {fileID: 0}
+    - target: {fileID: 6988179840569036855, guid: 0c44ddb2e4ec9a0479977e5db0956f6a, type: 3}
+      propertyPath: m_TagString
+      value: Sword
+      objectReference: {fileID: 0}
     - target: {fileID: 7759931022356613773, guid: 0c44ddb2e4ec9a0479977e5db0956f6a, type: 3}
       propertyPath: m_RootOrder
       value: 0

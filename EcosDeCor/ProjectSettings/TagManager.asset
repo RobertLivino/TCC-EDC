@@ -9,6 +9,7 @@ TagManager:
   - EnemyCrab
   - Spell
   - Memory
+  - Sword
   layers:
   - Default
   - TransparentFX
