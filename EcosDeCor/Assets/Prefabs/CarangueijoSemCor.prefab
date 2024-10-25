@@ -1296,6 +1296,7 @@ MonoBehaviour:
   mapaController: {fileID: 0}
   healthBar: {fileID: 6184346669404215785}
   fill: 0
+  visao: {fileID: 5017538447811139227}
 --- !u!1 &6796084987740961092
 GameObject:
   m_ObjectHideFlags: 0

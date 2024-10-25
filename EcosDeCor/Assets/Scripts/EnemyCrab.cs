@@ -8,7 +8,7 @@ public class EnemyCrab : MonoBehaviour
     public PlayerScript playerScript;
     public MapaController mapaController;
     public HealthBar healthBar;
-    public bool fill;
+    public Transform visao;
     // Start is called before the first frame update
     void Start()
     {
