@@ -9,12 +9,21 @@ public class EnemyCrab : MonoBehaviour
     public MapaController mapaController;
     public HealthBar healthBar;
     public Transform visao;
+    public Transform visaoCostas;
     public NavMeshAgent agent;
     public LayerMask playerLayerMask;
+    private Animator animator;
+
+    public GameObject SpellPointCast;
+    public Vector3 SpellDestination;
+    public GameObject spellToCast;
+    public float spellSpeed;
+    public float spellDamage = 2;
     // Start is called before the first frame update
     void Start()
     {
         healthBar.FillHealthStart(4f);
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -28,11 +37,24 @@ public class EnemyCrab : MonoBehaviour
             mapaController.healthHealtValue = 1f;
             Destroy(gameObject);
         }
-        Ray ray = new Ray(visao.transform.position, visao.transform.forward);
+        Ray rayFrente = new Ray(visao.transform.position, visao.transform.forward);
+        Ray rayCosta = new Ray(visaoCostas.transform.position, visaoCostas.transform.forward);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 5,playerLayerMask))
+        if (Physics.Raycast(rayFrente, out hit, 5,playerLayerMask) || Physics.Raycast(rayCosta, out hit, 5, playerLayerMask))
         {
-            Debug.Log("Player");
+            if (hit.transform.position.x > transform.position.x)
+            {
+                transform.rotation = Quaternion.Euler(0, 90, 0);
+            }
+            if (hit.transform.position.x < transform.position.x)
+            {
+                transform.rotation = Quaternion.Euler(0, -90, 0);
+            }
+            animator.SetBool("Attack", true);
+        }
+        else
+        {
+            animator.SetBool("Attack", false);
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -45,5 +67,11 @@ public class EnemyCrab : MonoBehaviour
         {
             healthBar.TakeDamage(playerScript.spellDamage);
         }
+    }
+    public void CastSpell()
+    {
+        var SpellObj = Instantiate(spellToCast, SpellPointCast.transform.position, Quaternion.identity) as GameObject;
+        SpellObj.GetComponent<Rigidbody>().velocity = SpellPointCast.transform.forward.normalized * spellSpeed;
+        Destroy(SpellObj, 15f);
     }
 }

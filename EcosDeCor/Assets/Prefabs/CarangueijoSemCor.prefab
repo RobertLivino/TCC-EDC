@@ -119,7 +119,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 712918703313017509}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.71, z: 0.99}
+  m_LocalPosition: {x: 0, y: 0.84, z: 1.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -464,6 +464,37 @@ Transform:
   - {fileID: 1191672360624481594}
   m_Father: {fileID: 6251554902264337233}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1717993022088566294
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5052622695002530950}
+  m_Layer: 0
+  m_Name: EnemyCast
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5052622695002530950
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1717993022088566294}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.01, y: 1.0564132, z: 2.3}
+  m_LocalScale: {x: 0.99999976, y: 1, z: 0.99999976}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5933932290201111346}
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2020167018458921192
 GameObject:
@@ -1172,6 +1203,37 @@ Transform:
   m_Father: {fileID: 7140692569065427029}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6376268014180292896
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8052101329975415872}
+  m_Layer: 0
+  m_Name: VisaoCostas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8052101329975415872
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6376268014180292896}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0.84, z: -1.36}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5933932290201111346}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &6418297242399543688
 GameObject:
   m_ObjectHideFlags: 0
@@ -1215,6 +1277,8 @@ Transform:
   - {fileID: 4173926699396766869}
   - {fileID: 6184346669708332814}
   - {fileID: 5017538447811139227}
+  - {fileID: 8052101329975415872}
+  - {fileID: 5052622695002530950}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
@@ -1297,10 +1361,16 @@ MonoBehaviour:
   mapaController: {fileID: 0}
   healthBar: {fileID: 6184346669404215785}
   visao: {fileID: 5017538447811139227}
+  visaoCostas: {fileID: 8052101329975415872}
   agent: {fileID: 1406617024078018488}
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 8
+  SpellPointCast: {fileID: 1717993022088566294}
+  SpellDestination: {x: 0, y: 0, z: 0}
+  spellToCast: {fileID: 2624209793632289999, guid: 870853d28a647bc45b09525169aec33b, type: 3}
+  spellSpeed: 1
+  spellDamage: 2
 --- !u!195 &1406617024078018488
 NavMeshAgent:
   m_ObjectHideFlags: 0
