@@ -1,0 +1,89 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AI;
+
+public class EnemyCollosso : MonoBehaviour
+{
+    public PlayerScript playerScript;
+    public MapaController mapaController;
+    public HealthBar healthBar;
+    public Transform visao;
+    public Transform visaoCostas;
+    public LayerMask playerLayerMask;
+    public NavMeshAgent agent;
+    private Animator animator;
+    public float MoveSpeed;
+    // Start is called before the first frame update
+    void Start()
+    {
+        healthBar.FillHealthStart(4f);
+        animator = GetComponent<Animator>();
+        agent = GetComponent<NavMeshAgent>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (healthBar.currentHealth <= 0)
+        {
+            mapaController.healthMana = true;
+            mapaController.healthManaValue = 20f;
+            mapaController.healthHealt = true;
+            mapaController.healthHealtValue = 3f;
+            animator.SetBool("Death", true);
+        }
+        Ray rayFrente = new Ray(visao.transform.position, visao.transform.forward);
+        Ray rayCosta = new Ray(visaoCostas.transform.position, visaoCostas.transform.forward);
+        RaycastHit hit;
+        if (Physics.Raycast(rayFrente, out hit, 10, playerLayerMask) || Physics.Raycast(rayCosta, out hit, 10, playerLayerMask))
+        {
+            agent.SetDestination(hit.transform.position);
+            agent.speed = MoveSpeed;
+            if (hit.transform.position.x > transform.position.x)
+            {
+                if (hit.transform.position.x - transform.position.x > 5)
+                {
+                    animator.SetBool("Move", true);
+                    agent.isStopped = false;
+                    animator.SetBool("Attack", false);
+                }
+                else
+                {
+                    animator.SetBool("Move", false);
+                    agent.isStopped = true;
+                    animator.SetBool("Attack", true);
+                }
+                transform.rotation = Quaternion.Euler(0, 90, 0);
+            }
+            if (hit.transform.position.x < transform.position.x)
+            {
+                if (hit.transform.position.x - transform.position.x < -5)
+                {
+                    animator.SetBool("Move", true);
+                    agent.isStopped = false;
+                    animator.SetBool("Attack", false);
+                }
+                else
+                {
+                    animator.SetBool("Move", false);
+                    agent.isStopped = true;
+                    animator.SetBool("Attack", true);
+                }
+                transform.rotation = Quaternion.Euler(0, -90, 0);
+            }
+            Debug.Log(hit.transform.position.x - transform.position.x);
+        }
+        else
+        {
+            animator.SetBool("Attack", false);
+            animator.SetBool("Move", false);
+            agent.isStopped = true;
+        }
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
+}

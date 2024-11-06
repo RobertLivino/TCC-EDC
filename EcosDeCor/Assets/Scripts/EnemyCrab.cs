@@ -10,7 +10,6 @@ public class EnemyCrab : MonoBehaviour
     public HealthBar healthBar;
     public Transform visao;
     public Transform visaoCostas;
-    public NavMeshAgent agent;
     public LayerMask playerLayerMask;
     private Animator animator;
 
