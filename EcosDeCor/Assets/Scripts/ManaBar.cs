@@ -7,7 +7,7 @@ public class ManaBar : MonoBehaviour
 {
     public Image manaBar;
     public float maxMana;
-    private float currentMana;
+    public float currentMana;
 
     void Start()
     {

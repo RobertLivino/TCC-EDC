@@ -17,7 +17,7 @@ public class EnemyCollosso : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        healthBar.FillHealthStart(4f);
+        healthBar.FillHealthStart(10f);
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
     }
@@ -52,6 +52,7 @@ public class EnemyCollosso : MonoBehaviour
                 {
                     animator.SetBool("Move", false);
                     agent.isStopped = true;
+                    transform.position = transform.position;
                     animator.SetBool("Attack", true);
                 }
                 transform.rotation = Quaternion.Euler(0, 90, 0);
@@ -68,20 +69,31 @@ public class EnemyCollosso : MonoBehaviour
                 {
                     animator.SetBool("Move", false);
                     agent.isStopped = true;
+                    transform.position = transform.position;
                     animator.SetBool("Attack", true);
                 }
                 transform.rotation = Quaternion.Euler(0, -90, 0);
             }
-            Debug.Log(hit.transform.position.x - transform.position.x);
         }
         else
         {
             animator.SetBool("Attack", false);
             animator.SetBool("Move", false);
             agent.isStopped = true;
+            transform.position = transform.position;
         }
     }
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Sword")
+        {
+            healthBar.TakeDamage(playerScript.swordDamage);
+        }
+        if (other.tag == "Spell")
+        {
+            healthBar.TakeDamage(playerScript.spellDamage);
+        }
+    }
     public void Die()
     {
         Destroy(gameObject);

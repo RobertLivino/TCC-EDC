@@ -126,7 +126,7 @@ public class PlayerScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "EnemyCrab" && !attackAnimation)
+        if (other.gameObject.tag == "EnemyCrab" || other.gameObject.tag == "CollossoArm" && !attackAnimation)
         {
             if (other.transform.position.x > transform.position.x)
             {
@@ -138,7 +138,14 @@ public class PlayerScript : MonoBehaviour
             }
             knockUpCountdown = true;
             animator.SetBool("knockBack", true);
-            healthBar.TakeDamage(1);
+            if (other.gameObject.tag == "EnemyCrab")
+            {
+                healthBar.TakeDamage(1);
+            }
+            if (other.gameObject.tag == "CollossoArm")
+            {
+                healthBar.TakeDamage(2);
+            }
             if (healthBar.currentHealth <= 0)
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -271,11 +278,11 @@ public class PlayerScript : MonoBehaviour
     public void HealManaByEnemy(float heal) 
     {
         mapaController.healthMana = false;
-        manaBar.HealMana(heal);
+        manaBar.HealMana(heal > manaBar.maxMana ? manaBar.maxMana - manaBar.currentMana : heal);
     }
     public void HealHealthByEnemy(float heal) 
     {
         mapaController.healthHealt = false;
-        healthBar.HealDamage(heal);
+        healthBar.HealDamage(heal > healthBar.maxHealth ? healthBar.maxHealth - healthBar.currentHealth : heal);
     }
 }
