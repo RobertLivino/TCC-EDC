@@ -82,7 +82,7 @@ public class PlayerScript : MonoBehaviour
         {
             PlayerAttack();
         }
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K) && manaBar.currentMana > 0)
         {
             PlayerCastSpell();
         }
