@@ -25,7 +25,7 @@ public class EnemyCollosso : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (healthBar.currentHealth <= 0)
+        if (healthBar.currentHealth <= 0 && animator.GetBool("Death") == false)
         {
             mapaController.healthMana = true;
             mapaController.healthManaValue = 20f;
