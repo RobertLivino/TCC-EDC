@@ -19,7 +19,14 @@ public class Guardiao : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player") {
-            
+            mapaController.guardianRange = true;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            mapaController.guardianRange = false;
         }
     }
 }

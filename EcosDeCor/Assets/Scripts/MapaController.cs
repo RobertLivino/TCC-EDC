@@ -32,6 +32,7 @@ public class MapaController : MonoBehaviour
     {
         healthMana = false;
         memoriesColected = 0;
+        guardianRange = false;
     }
     void Update()
     {
