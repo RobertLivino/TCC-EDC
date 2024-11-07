@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,7 +11,6 @@ using UnityEngine.UIElements;
 
 public class PlayerScript : MonoBehaviour
 {
-    public GameObject audioDaColeta;
     public MapaController mapaController;
 
     private bool lookUp;
@@ -46,9 +46,9 @@ public class PlayerScript : MonoBehaviour
     public LayerMask groundMask;
     bool isGrounded;
     private float jumpHeight = 5f;
+    public bool jumpDown;
 
     public CharacterController controller;
-    // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -163,7 +163,7 @@ public class PlayerScript : MonoBehaviour
     {
         Gizmos.DrawWireSphere(groundCheck.position, groundDistance);
     }
-
+    //Triggers
     private void OnFinishedAscend()
     {
         animator.SetTrigger("jumpAscendFinished");
@@ -174,6 +174,7 @@ public class PlayerScript : MonoBehaviour
     }
     private void OnHitted()
     {
+        mapaController.PlayAttackAudio();
         hittedOnce = true;
     }
     private void OnFinishHit()
@@ -188,9 +189,16 @@ public class PlayerScript : MonoBehaviour
     {
         var SpellObj = Instantiate(spellToCast, SpellPointCast.transform.position, Quaternion.identity) as GameObject;
         SpellObj.GetComponent<Rigidbody>().velocity = SpellPointCast.transform.forward.normalized * spellSpeed;
+        mapaController.PlaySpellAudio();
         Destroy(SpellObj, 15f);
     }
+    private void PlayJumpDescend()
+    {
+        jumpDown = true;
+        mapaController.PlayJumpDownAudio();
+    }
 
+    //metodos
     private void RotatePlayer()
     {
         if (x < 0 && transform.rotation.y != -90)
@@ -213,11 +221,12 @@ public class PlayerScript : MonoBehaviour
         moveSpeed = isGrounded ? 12f : 10f;
         if (x != 0 && isGrounded)
         {
-            mapaController.PlayWalkAudio();
+            if(!mapaController.walking) mapaController.PlayWalkAudio();
             animator.SetBool("move", true);
         }
         else
         {
+            mapaController.StopWalkAudio();
             animator.SetBool("move", false);
         }
     }
@@ -225,6 +234,8 @@ public class PlayerScript : MonoBehaviour
     {
         if (isGrounded)
         {
+            jumpDown = false;
+            mapaController.PlayJumpUpAudio();
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
     }
@@ -232,7 +243,6 @@ public class PlayerScript : MonoBehaviour
     {
         if (isPlayerInAction())
         {
-            mapaController.PlayAttackAudio();
             animator.SetBool("Attack", true);
         }
     }

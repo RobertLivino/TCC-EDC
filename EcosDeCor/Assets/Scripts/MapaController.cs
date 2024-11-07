@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MapaController : MonoBehaviour
@@ -14,7 +15,9 @@ public class MapaController : MonoBehaviour
     public float memoriesColected;
     public TextMeshProUGUI memoriesCristalColected;
     public bool guardianRange;
+    public bool walking;
     public AudioSource playerActions;
+    public AudioSource playerWalk;
     public AudioSource crabActions;
     public AudioSource collossoActions;
     public AudioSource bossActions;
@@ -33,6 +36,13 @@ public class MapaController : MonoBehaviour
     void Update()
     {
         memoriesCristalColected.text = memoriesColected.ToString();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseGame();
+        }
+    }
+    public void PauseGame()
+    {
     }
     public void PlayColectedMemory()
     {
@@ -51,8 +61,14 @@ public class MapaController : MonoBehaviour
     }
     public void PlayWalkAudio()
     {
-        playerActions.clip = walkAudioPlayer;
-        playerActions.Play();
+        playerWalk.clip = walkAudioPlayer;
+        walking = true;
+        playerWalk.Play();
+    }
+    public void StopWalkAudio()
+    {
+        walking = false;
+        playerWalk.Stop();
     }
     public void PlayJumpUpAudio()
     {
