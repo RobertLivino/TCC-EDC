@@ -10,6 +10,8 @@ using UnityEngine.UIElements;
 
 public class PlayerScript : MonoBehaviour
 {
+    private AudioSouce audioSource;
+    public GameObject audioDaColeta;
     public MapaController mapaController;
 
     private bool lookUp;
@@ -155,6 +157,8 @@ public class PlayerScript : MonoBehaviour
         if(other.gameObject.tag == "Memory")
         {
             mapaController.memoriesColected += 1;
+            GameObject preFab = Instantiate(audioDaColeta, new Vector3(this.gameObject.transform.position.x,this.gameObject.transform.position.y, this.gameObject.transform.position.z), Quaternion.identity);
+            Destroy(preFab.gameObject, 1.5f);
         }
     }
     private void OnDrawGizmos()
