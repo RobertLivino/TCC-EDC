@@ -10,7 +10,6 @@ using UnityEngine.UIElements;
 
 public class PlayerScript : MonoBehaviour
 {
-    private AudioSouce audioSource;
     public GameObject audioDaColeta;
     public MapaController mapaController;
 
@@ -157,8 +156,7 @@ public class PlayerScript : MonoBehaviour
         if(other.gameObject.tag == "Memory")
         {
             mapaController.memoriesColected += 1;
-            GameObject preFab = Instantiate(audioDaColeta, new Vector3(this.gameObject.transform.position.x,this.gameObject.transform.position.y, this.gameObject.transform.position.z), Quaternion.identity);
-            Destroy(preFab.gameObject, 1.5f);
+            mapaController.PlayColectedMemory();
         }
     }
     private void OnDrawGizmos()
@@ -215,6 +213,7 @@ public class PlayerScript : MonoBehaviour
         moveSpeed = isGrounded ? 12f : 10f;
         if (x != 0 && isGrounded)
         {
+            mapaController.PlayWalkAudio();
             animator.SetBool("move", true);
         }
         else
@@ -233,6 +232,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (isPlayerInAction())
         {
+            mapaController.PlayAttackAudio();
             animator.SetBool("Attack", true);
         }
     }
