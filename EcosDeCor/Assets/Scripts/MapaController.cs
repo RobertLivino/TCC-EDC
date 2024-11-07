@@ -12,6 +12,7 @@ public class MapaController : MonoBehaviour
     public float healthHealtValue;
     public float memoriesColected;
     public TextMeshProUGUI memoriesCristalColected;
+    public 
     void Start()
     {
         healthMana = false;
