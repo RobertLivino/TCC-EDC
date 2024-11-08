@@ -399,6 +399,7 @@ MonoBehaviour:
   mapaController: {fileID: 0}
   toStartInteraction: {fileID: 2422344270921840581}
   dialogueBox: {fileID: 1595182068178943683}
+  dialogueText: {fileID: 4935269689526402430}
 --- !u!95 &8238922195436073069
 Animator:
   serializedVersion: 5

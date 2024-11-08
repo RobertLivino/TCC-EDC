@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMP;
+using TMPro;
 
 public class Guardiao : MonoBehaviour
 {
@@ -10,6 +10,7 @@ public class Guardiao : MonoBehaviour
     public GameObject toStartInteraction;
     public GameObject dialogueBox;
     public TextMeshProUGUI dialogueText;
+    public string
 
     void Start()
     {
