@@ -408,7 +408,7 @@ MonoBehaviour:
   - No laranja, reside a energia criativa que ilumina novos caminhos, como o sol
     ao amanhecer.
   - "Use essa energia com prop\xF3sito, e voc\xEA ver\xE1 o mundo com outros olhos."
-  textSpeed: 0.5
+  textSpeed: 1
 --- !u!95 &8238922195436073069
 Animator:
   serializedVersion: 5
