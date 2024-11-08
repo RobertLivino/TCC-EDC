@@ -94,9 +94,9 @@ public class PlayerScript : MonoBehaviour
         {
             HealHealthByEnemy(mapaController.healthHealtValue);
         }
-        if (mapaController.guardianRange)
+        if (mapaController.guardianRange && mapaController.guardianDoor)
         {
-
+            GuardianConversetion();
         }
 
         UpdateGravity();        
@@ -285,6 +285,12 @@ public class PlayerScript : MonoBehaviour
             return true;
         }
         return false;
+    }
+    private void GuardianConversetion()
+    {
+        if(Input.GetKeyDown(KeyCode.W))
+        {
+        }
     }
     public void HealManaByEnemy(float heal) 
     {

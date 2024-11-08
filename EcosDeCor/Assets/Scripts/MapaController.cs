@@ -15,6 +15,9 @@ public class MapaController : MonoBehaviour
     public float memoriesColected;
     public TextMeshProUGUI memoriesCristalColected;
     public bool guardianRange;
+    public bool guardianDoor;
+    
+    //Audio
     public bool walking;
     public AudioSource playerActions;
     public AudioSource playerWalk;
