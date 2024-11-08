@@ -16,6 +16,7 @@ public class MapaController : MonoBehaviour
     public TextMeshProUGUI memoriesCristalColected;
     public bool guardianRange;
     public bool guardianDoor;
+    public bool startDialogue;
     
     //Audio
     public bool walking;
@@ -36,6 +37,8 @@ public class MapaController : MonoBehaviour
         healthMana = false;
         memoriesColected = 0;
         guardianRange = false;
+        startDialogue = false;
+        guardianDoor = false;
     }
     void Update()
     {

@@ -288,8 +288,9 @@ public class PlayerScript : MonoBehaviour
     }
     private void GuardianConversetion()
     {
-        if(Input.GetKeyDown(KeyCode.W))
+        if(Input.GetKeyDown(KeyCode.W) && mapaController.guardianDoor)
         {
+            mapaController.startDialogue = true;
         }
     }
     public void HealManaByEnemy(float heal) 
