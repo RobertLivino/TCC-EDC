@@ -4,16 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
-
 {
-    public void LoadScene(int indexScene)
+    public void StartGame()
     {
-        SceneManager.LoadScene(indexScene);
+        SceneManager.LoadScene("MAPA 1");
     }
-
-    
-
-    
     public void ExitGame()
 
     {

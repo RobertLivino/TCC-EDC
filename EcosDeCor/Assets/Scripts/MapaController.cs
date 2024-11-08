@@ -1,9 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using JetBrains.Annotations;
+using UnityEditor;
+using UnityEngine.Rendering;
+using UnityEngine.UIElements;
 
 public class MapaController : MonoBehaviour
 {
@@ -16,7 +22,11 @@ public class MapaController : MonoBehaviour
     public TextMeshProUGUI memoriesCristalColected;
     public bool guardianRange;
     public bool guardianDoor;
-    
+    public bool startDialogue;
+
+    //pause
+    public GameObject pauseMenu;
+
     //Audio
     public bool walking;
     public AudioSource playerActions;
@@ -36,6 +46,8 @@ public class MapaController : MonoBehaviour
         healthMana = false;
         memoriesColected = 0;
         guardianRange = false;
+        startDialogue = false;
+        guardianDoor = false;
     }
     void Update()
     {
@@ -47,6 +59,17 @@ public class MapaController : MonoBehaviour
     }
     public void PauseGame()
     {
+        if (pauseMenu.activeSelf)
+
+        {
+            pauseMenu.SetActive(false);
+            Time.timeScale = 1;
+        }
+        else
+        {
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0;
+        }
     }
     public void PlayColectedMemory()
     {

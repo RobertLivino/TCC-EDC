@@ -53,6 +53,7 @@ public class PlayerScript : MonoBehaviour
         manaBar.FillManaStart(50f);
         spellDamage = 2f;
         swordDamage = 1f;
+        Debug.Log(SceneManager.GetActiveScene().name);
     }
 
     // Update is called once per frame
@@ -288,8 +289,9 @@ public class PlayerScript : MonoBehaviour
     }
     private void GuardianConversetion()
     {
-        if(Input.GetKeyDown(KeyCode.W))
+        if(Input.GetKeyDown(KeyCode.W) && mapaController.guardianDoor)
         {
+            mapaController.startDialogue = true;
         }
     }
     public void HealManaByEnemy(float heal) 

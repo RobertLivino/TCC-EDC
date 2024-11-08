@@ -6,6 +6,7 @@ public class Guardiao : MonoBehaviour
 {
     public MapaController mapaController;
     private Animator animator;
+    private 
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +16,10 @@ public class Guardiao : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (mapaController.guardianRange && mapaController.guardianDoor && !mapaController.startDialogue)
+        {
+            ShowConversationInteraction();
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -31,5 +35,9 @@ public class Guardiao : MonoBehaviour
             animator.SetBool("StandUp", false);
             mapaController.guardianRange = false;
         }
+    }
+    private void ShowConversationInteraction()
+    {
+
     }
 }
