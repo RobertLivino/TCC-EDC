@@ -53,6 +53,7 @@ public class PlayerScript : MonoBehaviour
         manaBar.FillManaStart(50f);
         spellDamage = 2f;
         swordDamage = 1f;
+        Debug.Log(SceneManager.GetActiveScene().name);
     }
 
     // Update is called once per frame
