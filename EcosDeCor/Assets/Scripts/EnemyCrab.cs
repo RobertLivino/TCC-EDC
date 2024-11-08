@@ -39,7 +39,7 @@ public class EnemyCrab : MonoBehaviour
         Ray rayFrente = new Ray(visao.transform.position, visao.transform.forward);
         Ray rayCosta = new Ray(visaoCostas.transform.position, visaoCostas.transform.forward);
         RaycastHit hit;
-        if (Physics.Raycast(rayFrente, out hit, 5,playerLayerMask) || Physics.Raycast(rayCosta, out hit, 5, playerLayerMask))
+        if (Physics.Raycast(rayFrente, out hit, 10,playerLayerMask) || Physics.Raycast(rayCosta, out hit, 10, playerLayerMask))
         {
             if (hit.transform.position.x > transform.position.x)
             {
