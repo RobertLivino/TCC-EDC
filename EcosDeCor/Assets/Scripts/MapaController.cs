@@ -20,9 +20,12 @@ public class MapaController : MonoBehaviour
     public float healthHealtValue;
     public float memoriesColected;
     public TextMeshProUGUI memoriesCristalColected;
+    
     public bool guardianRange;
     public bool guardianDoor;
-    public bool startDialogue;
+    public bool startedDialogue;
+    public bool blockConversation;
+    public int blockConversationCount;
 
     //pause
     public GameObject pauseMenu;
@@ -46,8 +49,9 @@ public class MapaController : MonoBehaviour
         healthMana = false;
         memoriesColected = 0;
         guardianRange = false;
-        startDialogue = false;
-        guardianDoor = false;
+        guardianDoor = true;
+        blockConversation = false;
+        blockConversationCount = 0;
     }
     void Update()
     {

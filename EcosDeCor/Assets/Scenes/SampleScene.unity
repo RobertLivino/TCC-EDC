@@ -431,8 +431,10 @@ MonoBehaviour:
   memoriesColected: 0
   memoriesCristalColected: {fileID: 1757860697}
   guardianRange: 0
-  guardianDoor: 0
-  startDialogue: 0
+  guardianDoor: 1
+  startedDialogue: 0
+  blockConversation: 0
+  blockConversationCount: 0
   pauseMenu: {fileID: 695905431}
   walking: 0
   playerActions: {fileID: 1465688361}

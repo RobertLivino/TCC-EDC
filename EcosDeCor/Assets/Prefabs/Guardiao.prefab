@@ -400,6 +400,15 @@ MonoBehaviour:
   toStartInteraction: {fileID: 2422344270921840581}
   dialogueBox: {fileID: 1595182068178943683}
   dialogueText: {fileID: 4935269689526402430}
+  lines:
+  - "Eu sou o Guardi\xE3o das Cores Quentes."
+  - "No vermelho, voc\xEA encontrar\xE1 a for\xE7a e a paix\xE3o para enfrentar at\xE9
+    o mais \xE1rduo dos desafios."
+  - "Mas lembre-se de dom\xE1-la para que n\xE3o o consuma."
+  - No laranja, reside a energia criativa que ilumina novos caminhos, como o sol
+    ao amanhecer.
+  - "Use essa energia com prop\xF3sito, e voc\xEA ver\xE1 o mundo com outros olhos."
+  textSpeed: 0.5
 --- !u!95 &8238922195436073069
 Animator:
   serializedVersion: 5
@@ -438,7 +447,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3351270079461125229
 RectTransform:
   m_ObjectHideFlags: 0

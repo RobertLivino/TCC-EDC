@@ -53,7 +53,6 @@ public class PlayerScript : MonoBehaviour
         manaBar.FillManaStart(50f);
         spellDamage = 2f;
         swordDamage = 1f;
-        Debug.Log(SceneManager.GetActiveScene().name);
     }
 
     // Update is called once per frame
@@ -95,12 +94,21 @@ public class PlayerScript : MonoBehaviour
         {
             HealHealthByEnemy(mapaController.healthHealtValue);
         }
-        if (mapaController.guardianRange && mapaController.guardianDoor)
+        if (Input.GetKeyDown(KeyCode.W) && !mapaController.blockConversation)
         {
             GuardianConversetion();
         }
+        if (Input.GetKeyDown(KeyCode.W) && mapaController.blockConversation && !mapaController.startedDialogue)
+        {
+            mapaController.blockConversationCount++;
+            if (mapaController.blockConversationCount > 1)
+            {
+                mapaController.blockConversationCount = 0;
+                mapaController.blockConversation = false;
+            }
+        }
 
-        UpdateGravity();        
+        UpdateGravity();    
     }
 
     private void FixedUpdate()
@@ -210,10 +218,14 @@ public class PlayerScript : MonoBehaviour
     }
     private void MovePlayer()
     {
-        Vector3 move = new Vector3(x, 0, 0);
+        Vector3 move = mapaController.startedDialogue ? new Vector3(0, 0, 0) : new Vector3(x, 0, 0);
         if (!knockUpCountdown)
         {
             controller.Move(move * moveSpeed * Time.deltaTime);
+        }
+        if (mapaController.startedDialogue)
+        {
+            x = 0;
         }
 
         moveSpeed = isGrounded ? 12f : 10f;
@@ -289,9 +301,9 @@ public class PlayerScript : MonoBehaviour
     }
     private void GuardianConversetion()
     {
-        if(Input.GetKeyDown(KeyCode.W) && mapaController.guardianDoor)
+        if (mapaController.guardianRange && mapaController.guardianDoor && !mapaController.startedDialogue)
         {
-            mapaController.startDialogue = true;
+            mapaController.startedDialogue = true;
         }
     }
     public void HealManaByEnemy(float heal) 
