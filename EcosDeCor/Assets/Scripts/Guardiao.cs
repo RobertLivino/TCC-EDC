@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMP;
 
 public class Guardiao : MonoBehaviour
 {
     public MapaController mapaController;
     private Animator animator;
-    private 
-    // Start is called before the first frame update
+    public GameObject toStartInteraction;
+    public GameObject dialogueBox;
+    public TextMeshProUGUI dialogueText;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -19,6 +22,14 @@ public class Guardiao : MonoBehaviour
         if (mapaController.guardianRange && mapaController.guardianDoor && !mapaController.startDialogue)
         {
             ShowConversationInteraction();
+        }
+        else
+        {
+            HideConversationInteraction();
+        }
+        if (mapaController.guardianRange && mapaController.guardianDoor && mapaController.startDialogue)
+        {
+            StartDialogue();
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -38,6 +49,14 @@ public class Guardiao : MonoBehaviour
     }
     private void ShowConversationInteraction()
     {
-
+        toStartInteraction.SetActive(true);
+    }
+    private void HideConversationInteraction()
+    {
+        toStartInteraction.SetActive(false);
+    }
+    private void StartDialogue()
+    {
+        dialogueBox.SetActive(false);
     }
 }

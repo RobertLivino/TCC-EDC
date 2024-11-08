@@ -433,7 +433,7 @@ MonoBehaviour:
   guardianRange: 0
   guardianDoor: 0
   startDialogue: 0
-  pauseMenu: {fileID: 0}
+  pauseMenu: {fileID: 695905431}
   walking: 0
   playerActions: {fileID: 1465688361}
   playerWalk: {fileID: 1465688360}
