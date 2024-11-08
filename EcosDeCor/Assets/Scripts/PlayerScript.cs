@@ -13,12 +13,9 @@ public class PlayerScript : MonoBehaviour
 {
     public MapaController mapaController;
 
-    private bool lookUp;
-    private bool lookDown;
     private float moveSpeed = 12f;
     private float gravity = -9.81f;
     private float x;
-    private float y;
 
     private bool knockUpCountdown = false;
     private float startKnockUpCountdown = 0.2f;
@@ -62,10 +59,6 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         x = Input.GetAxis("Horizontal");
-        y = Input.GetAxis("Vertical");
-
-        //lookUp = y > 0 ? true : false;
-        //lookDown = y < 0 ? true : false;
 
         MovePlayer();
 
@@ -100,6 +93,10 @@ public class PlayerScript : MonoBehaviour
         if (mapaController.healthHealt)
         {
             HealHealthByEnemy(mapaController.healthHealtValue);
+        }
+        if (mapaController.guardianRange)
+        {
+
         }
 
         UpdateGravity();        
