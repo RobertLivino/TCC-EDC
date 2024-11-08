@@ -10,7 +10,6 @@ public class Guardiao : MonoBehaviour
     public GameObject toStartInteraction;
     public GameObject dialogueBox;
     public TextMeshProUGUI dialogueText;
-    public string
 
     void Start()
     {
@@ -28,10 +27,10 @@ public class Guardiao : MonoBehaviour
         {
             HideConversationInteraction();
         }
-        if (mapaController.guardianRange && mapaController.guardianDoor && mapaController.startDialogue)
-        {
-            StartDialogue();
-        }
+        //if (mapaController.guardianRange && mapaController.guardianDoor && mapaController.startDialogue)
+        //{
+        //    StartDialogue();
+        //}
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -56,8 +55,8 @@ public class Guardiao : MonoBehaviour
     {
         toStartInteraction.SetActive(false);
     }
-    private void StartDialogue()
-    {
-        dialogueBox.SetActive(false);
-    }
+    //private void StartDialogue()
+    //{
+    //    dialogueBox.SetActive(false);
+    //}
 }
