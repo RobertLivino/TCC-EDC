@@ -20,7 +20,7 @@ public class PlayerSword : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (playerScript.attackAnimation && other.gameObject.tag == "EnemyCrab" || other.gameObject.tag == "EnemyNotCrab")
+        if (playerScript.attackAnimation && other.gameObject.tag == "EnemyCrab" || other.gameObject.tag == "Collosso")
         {
             enterAttack = true;
         }

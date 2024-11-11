@@ -133,7 +133,7 @@ public class PlayerScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "EnemyCrab" || other.gameObject.tag == "CollossoArm" && !attackAnimation)
+        if ((other.gameObject.tag == "EnemyCrab" || other.gameObject.tag == "CollossoArm") && !attackAnimation)
         {
             if (other.transform.position.x > transform.position.x)
             {

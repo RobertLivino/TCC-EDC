@@ -11,6 +11,8 @@ TagManager:
   - Memory
   - Sword
   - CollossoArm
+  - Void
+  - Collosso
   layers:
   - Default
   - TransparentFX
