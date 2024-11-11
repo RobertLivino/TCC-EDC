@@ -17,11 +17,12 @@ public class PauseMenu : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
-        Debug.Log("IS EXIT");
+        Time.timeScale = 1;
     }
     public void ExitToMenu()
     {
         SceneManager.LoadScene("MenuTeste");
+        Time.timeScale = 1;
     }
     public void Resume()
     {

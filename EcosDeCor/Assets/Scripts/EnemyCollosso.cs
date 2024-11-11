@@ -42,7 +42,7 @@ public class EnemyCollosso : MonoBehaviour
             agent.speed = MoveSpeed;
             if (hit.transform.position.x > transform.position.x)
             {
-                if (hit.transform.position.x - transform.position.x > 5)
+                if (hit.transform.position.x - transform.position.x > 5 && !animator.GetBool("Attack"))
                 {
                     animator.SetBool("Move", true);
                     agent.isStopped = false;
@@ -59,7 +59,7 @@ public class EnemyCollosso : MonoBehaviour
             }
             if (hit.transform.position.x < transform.position.x)
             {
-                if (hit.transform.position.x - transform.position.x < -5)
+                if (hit.transform.position.x - transform.position.x < -5 && !animator.GetBool("Attack"))
                 {
                     animator.SetBool("Move", true);
                     agent.isStopped = false;
@@ -93,6 +93,10 @@ public class EnemyCollosso : MonoBehaviour
         {
             healthBar.TakeDamage(playerScript.spellDamage);
         }
+    }
+    public void FisinhAttack()
+    {
+        animator.SetBool("Attack", false);
     }
     public void Die()
     {

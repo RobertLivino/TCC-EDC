@@ -14,11 +14,10 @@ public class PlayerScript : MonoBehaviour
     public MapaController mapaController;
 
     private float moveSpeed = 12f;
-    private float gravity = -9.81f;
     private float x;
 
     private bool knockUpCountdown = false;
-    private float startKnockUpCountdown = 0.2f;
+    private float startKnockUpCountdown = 0.5f;
     private float currentKnockUpCountdown = 0.5f;
 
     public HealthBar healthBar;
@@ -36,16 +35,21 @@ public class PlayerScript : MonoBehaviour
     public float spellSpeed;
     public float spellDamage = 2;
 
-    Vector3 velocity;
     public Transform headCheack;
     public Transform groundCheck;
     private float groundDistance = 0.5f;
     public LayerMask groundMask;
-    bool isGrounded;
-    private float jumpHeight = 5f;
-    public bool jumpDown;
+    private bool isGrounded;
+    private bool isJumping;
+    private float jumpCount;
+    private float jumpTime = 0.4f;
+    private float jumpMultplier = 1.3f;
+    private int jumpPower = 6;
+    public float fallMultiplayer = 0.01f;
+    public Vector3 vecGravity;
 
-    public CharacterController controller;
+    //public CharacterController controller;
+    private Rigidbody rb;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -53,6 +57,8 @@ public class PlayerScript : MonoBehaviour
         manaBar.FillManaStart(50f);
         spellDamage = 2f;
         swordDamage = 1f;
+        rb = GetComponent<Rigidbody>();
+        vecGravity = new Vector3(0, -Physics.gravity.y, 0);
     }
 
     // Update is called once per frame
@@ -121,7 +127,7 @@ public class PlayerScript : MonoBehaviour
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         animator.SetBool("IsGrounded", isGrounded);
 
-        if (isGrounded && velocity.y < 0)
+        if (isGrounded && rb.velocity.y < 0)
         {
             animator.SetInteger("jumpState", 0);
         }
@@ -134,7 +140,7 @@ public class PlayerScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         string otherTag = other.gameObject.tag;
-        if ((otherTag == "EnemyCrab" || otherTag == "CollossoArm") && !attackAnimation)
+        if ((otherTag == "EnemyCrab" || otherTag == "CollossoArm" || otherTag == "Collosso") && !attackAnimation)
         {
             if (other.transform.position.x > transform.position.x)
             {
@@ -163,10 +169,10 @@ public class PlayerScript : MonoBehaviour
         {
             mapaController.memoriesColected += 1;
             mapaController.PlayColectedMemory();
+            Destroy(other);
         }
         if(otherTag == "Void")
         {
-            healthBar.TakeDamage(healthBar.currentHealth);
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
@@ -206,7 +212,6 @@ public class PlayerScript : MonoBehaviour
     }
     private void PlayJumpDescend()
     {
-        jumpDown = true;
         mapaController.PlayJumpDownAudio();
     }
 
@@ -224,10 +229,11 @@ public class PlayerScript : MonoBehaviour
     }
     private void MovePlayer()
     {
-        Vector3 move = mapaController.startedDialogue ? new Vector3(0, 0, 0) : new Vector3(x, 0, 0);
+        Vector3 move = mapaController.startedDialogue ? new Vector3(0, 0, 0) : new Vector3(x * moveSpeed, rb.velocity.y, 0);
+
         if (!knockUpCountdown)
         {
-            controller.Move(move * moveSpeed * Time.deltaTime);
+            rb.velocity = move;
         }
         if (mapaController.startedDialogue)
         {
@@ -237,7 +243,7 @@ public class PlayerScript : MonoBehaviour
         moveSpeed = isGrounded ? 12f : 10f;
         if (x != 0 && isGrounded)
         {
-            if(!mapaController.walking) mapaController.PlayWalkAudio();
+            if (!mapaController.walking) mapaController.PlayWalkAudio();
             animator.SetBool("move", true);
         }
         else
@@ -250,9 +256,10 @@ public class PlayerScript : MonoBehaviour
     {
         if (isGrounded)
         {
-            jumpDown = false;
+            isJumping = true;
+            jumpCount = 0;
             mapaController.PlayJumpUpAudio();
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            rb.velocity = new Vector3(rb.velocity.x, jumpPower, 0);
         }
     }
     private void PlayerAttack()
@@ -272,23 +279,48 @@ public class PlayerScript : MonoBehaviour
     }
     private void UpdateGravity()
     {
-        if (isGrounded && velocity.y < 0)
+        if (rb.velocity.y > 0 && isJumping)
         {
-            velocity.y = -2;
+            jumpCount += Time.deltaTime;
+            if (jumpCount > jumpTime) isJumping = false;
+
+            float t = jumpCount / jumpTime;
+            float currentjump = jumpMultplier;
+
+            if (t > 0.5)
+            {
+                currentjump = jumpMultplier * (1 - t);
+            }
+            rb.velocity += vecGravity * jumpMultplier * Time.deltaTime;
         }
-        velocity.y += gravity * Time.deltaTime;
-        if (Physics.Raycast(headCheack.position, headCheack.up, 0.1f))
+        if (Input.GetButtonUp("Jump"))
         {
-            velocity.y = -0.5f;
+            isJumping = false;
+            jumpCount = 0;
+
+            if (rb.velocity.y > 0)
+            {
+                rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y * 0.6f, 0);
+            }
         }
-        controller.Move(velocity * Time.deltaTime);
+        if (rb.velocity.y < 0)
+        {
+            rb.velocity -= vecGravity * fallMultiplayer * Time.deltaTime;
+        }
     }
     private void UpdateKnockUpCountdown()
     {
         if (currentKnockUpCountdown > 0)
         {
             currentKnockUpCountdown -= 1 * Time.deltaTime;
-            controller.Move(new Vector3(transform.rotation.y < 0 ? 0.5f : -0.5f, 0, 0) * 12f * Time.deltaTime);
+            if (transform.rotation.y < 0)
+            {
+                rb.velocity = new Vector3(8, 0, 0);
+            }
+            else
+            {
+                rb.velocity = new Vector3(-8, 0, 0);
+            }
         }
         else
         {

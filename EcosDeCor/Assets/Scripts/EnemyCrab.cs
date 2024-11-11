@@ -71,6 +71,6 @@ public class EnemyCrab : MonoBehaviour
     {
         var SpellObj = Instantiate(spellToCast, SpellPointCast.transform.position, Quaternion.identity) as GameObject;
         SpellObj.GetComponent<Rigidbody>().velocity = SpellPointCast.transform.forward.normalized * spellSpeed;
-        Destroy(SpellObj, 15f);
+        Destroy(SpellObj, 5f);
     }
 }
