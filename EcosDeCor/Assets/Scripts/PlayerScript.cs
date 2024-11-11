@@ -133,7 +133,8 @@ public class PlayerScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if ((other.gameObject.tag == "EnemyCrab" || other.gameObject.tag == "CollossoArm") && !attackAnimation)
+        string otherTag = other.gameObject.tag;
+        if ((otherTag == "EnemyCrab" || otherTag == "CollossoArm") && !attackAnimation)
         {
             if (other.transform.position.x > transform.position.x)
             {
@@ -145,11 +146,11 @@ public class PlayerScript : MonoBehaviour
             }
             knockUpCountdown = true;
             animator.SetBool("knockBack", true);
-            if (other.gameObject.tag == "EnemyCrab")
+            if (otherTag == "EnemyCrab")
             {
                 healthBar.TakeDamage(1);
             }
-            if (other.gameObject.tag == "CollossoArm")
+            if (otherTag == "CollossoArm")
             {
                 healthBar.TakeDamage(2);
             }
@@ -158,12 +159,17 @@ public class PlayerScript : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
         }
-
-        if(other.gameObject.tag == "Memory")
+        if(otherTag == "Memory")
         {
             mapaController.memoriesColected += 1;
             mapaController.PlayColectedMemory();
         }
+        if(otherTag == "Void")
+        {
+            healthBar.TakeDamage(healthBar.currentHealth);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
     }
     private void OnDrawGizmos()
     {
