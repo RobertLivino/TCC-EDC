@@ -200,9 +200,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2094303783901415624}
   - component: {fileID: 1917072531669085503}
-  - component: {fileID: 1917072531669085498}
   - component: {fileID: 1917072531669085497}
   - component: {fileID: 1917072531669085499}
+  - component: {fileID: 4809514196550281163}
   m_Layer: 3
   m_Name: HuePlayer
   m_TagString: Player
@@ -247,24 +247,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
---- !u!143 &1917072531669085498
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1611064491825631858}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 3.67
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1.866, z: 0}
 --- !u!95 &1917072531669085497
 Animator:
   serializedVersion: 5
@@ -315,7 +297,22 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 64
-  controller: {fileID: 1917072531669085498}
+  fallMultiplayer: 3
+  vecGravity: {x: 0, y: 0, z: 0}
+--- !u!64 &4809514196550281163
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611064491825631858}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5139632958741017465, guid: b95809286673dbb4a9a0c4d0788b1d79, type: 3}
 --- !u!1 &1705482476596249130
 GameObject:
   m_ObjectHideFlags: 0
@@ -955,6 +952,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manaBar: {fileID: 1917072530737474945}
   maxMana: 100
+  currentMana: 0
 --- !u!1 &1917072530900593091
 GameObject:
   m_ObjectHideFlags: 0
@@ -1485,9 +1483,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2592473147565856876}
   - component: {fileID: 182268287778404669}
+  - component: {fileID: 2397682425553347280}
   m_Layer: 3
   m_Name: HueMesh
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1585,6 +1584,20 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.0000962615, y: 0.25573146, z: -0.107938975}
     m_Extent: {x: 1.522033, y: 1.8760377, z: 0.6956309}
   m_DirtyAABB: 0
+--- !u!64 &2397682425553347280
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4785131586712800593}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5139632958741017465, guid: b95809286673dbb4a9a0c4d0788b1d79, type: 3}
 --- !u!1 &4962183086378835690
 GameObject:
   m_ObjectHideFlags: 0
