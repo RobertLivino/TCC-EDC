@@ -35,7 +35,6 @@ public class PlayerScript : MonoBehaviour
     public float spellSpeed;
     public float spellDamage = 2;
 
-    public Transform headCheack;
     public Transform groundCheck;
     private float groundDistance = 0.5f;
     public LayerMask groundMask;
@@ -44,8 +43,8 @@ public class PlayerScript : MonoBehaviour
     private float jumpCount;
     private float jumpTime = 0.4f;
     private float jumpMultplier = 1.3f;
-    private int jumpPower = 6;
-    public float fallMultiplayer = 0.01f;
+    private int jumpPower = 8;
+    public float fallMultiplayer = 0.001f;
     public Vector3 vecGravity;
 
     //public CharacterController controller;
