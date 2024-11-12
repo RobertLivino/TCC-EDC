@@ -32,7 +32,8 @@ public class HealthBar : MonoBehaviour
 
     public void HealDamage(float heal)
     {
-        currentHealth += heal;
+        float totalFill = heal + currentHealth;
+        currentHealth = totalFill > maxHealth ? maxHealth : totalFill;
 
         healthBar.fillAmount = currentHealth / maxHealth;
     }

@@ -32,7 +32,8 @@ public class ManaBar : MonoBehaviour
 
     public void HealMana(float heal)
     {
-        currentMana += heal;
+        float totalFill = heal + currentMana;
+        currentMana = totalFill > maxMana ? maxMana : totalFill;
 
         manaBar.fillAmount = currentMana / maxMana;
     }

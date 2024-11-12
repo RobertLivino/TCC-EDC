@@ -332,51 +332,6 @@ public class PlayerScript : MonoBehaviour
             animator.SetBool("knockBack", false);
         }
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        string otherTag = collision.gameObject.tag;
-        if ((otherTag == "EnemyCrab" || otherTag == "CollossoArm" || otherTag == "Collosso") && !attackAnimation)
-        {
-            if (collision.transform.position.x > transform.position.x)
-            {
-                transform.rotation = Quaternion.Euler(0, 90, 0);
-            }
-            else
-            {
-                transform.rotation = Quaternion.Euler(0, -90, 0);
-            }
-            knockUpCountdown = true;
-            animator.SetBool("knockBack", true);
-            if (otherTag == "EnemyCrab")
-            {
-                healthBar.TakeDamage(1);
-            }
-            if (otherTag == "CollossoArm")
-            {
-                healthBar.TakeDamage(2);
-            }
-            if (healthBar.currentHealth <= 0)
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            }
-        }
-        if (otherTag == "Memory")
-        {
-            mapaController.memoriesColected += 1;
-            mapaController.PlayColectedMemory();
-            Destroy(collision.gameObject);
-        }
-        if (otherTag == "Eco")
-        {
-            mapaController.ecoColectedCount++;
-            mapaController.PlayColectedMemory();
-            Destroy(collision.gameObject);
-        }
-        if (otherTag == "Void")
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-    }
     private bool isPlayerInAction()
     {
         if(!animator.GetBool("Attack") && !animator.GetBool("Spell"))
