@@ -18,9 +18,13 @@ public class MapaController : MonoBehaviour
     public float healthManaValue;
     public bool healthHealt;
     public float healthHealtValue;
+
+    public int ecoColectedCount;
     public float memoriesColected;
     public TextMeshProUGUI memoriesCristalColected;
-    
+    public GameObject memoryImage;
+    public bool memoryImageStatus;
+
     public bool guardianRange;
     public bool guardianDoor;
     public bool startedDialogue;
@@ -48,6 +52,7 @@ public class MapaController : MonoBehaviour
     {
         healthMana = false;
         memoriesColected = 0;
+        ecoColectedCount = 0;
         guardianRange = false;
         guardianDoor = true;
         blockConversation = false;
@@ -55,10 +60,22 @@ public class MapaController : MonoBehaviour
     }
     void Update()
     {
-        memoriesCristalColected.text = memoriesColected.ToString();
+        memoriesCristalColected.text = ecoColectedCount.ToString();
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             PauseGame();
+        }
+        if (Input.GetKeyDown(KeyCode.W) && memoryImageStatus)
+        {
+            memoryImage.SetActive(false);
+            memoryImageStatus = false;
+            Time.timeScale = 1;
+        }
+        if (memoryImageStatus)
+        {
+            memoryImage.SetActive(true);
+            memoryImageStatus = true;
+            Time.timeScale = 0;
         }
     }
     public void PauseGame()

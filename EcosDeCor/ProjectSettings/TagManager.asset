@@ -13,6 +13,7 @@ TagManager:
   - CollossoArm
   - Void
   - Collosso
+  - Eco
   layers:
   - Default
   - TransparentFX

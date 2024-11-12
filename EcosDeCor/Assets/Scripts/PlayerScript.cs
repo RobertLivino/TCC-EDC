@@ -103,6 +103,7 @@ public class PlayerScript : MonoBehaviour
         {
             GuardianConversetion();
         }
+        
         if (Input.GetKeyDown(KeyCode.W) && mapaController.blockConversation && !mapaController.startedDialogue)
         {
             mapaController.blockConversationCount++;
@@ -166,7 +167,13 @@ public class PlayerScript : MonoBehaviour
         }
         if(otherTag == "Memory")
         {
-            mapaController.memoriesColected += 1;
+            mapaController.PlayColectedMemory();
+            mapaController.memoryImageStatus = true;
+            Destroy(other);
+        }
+        if(otherTag == "Eco")
+        {
+            mapaController.ecoColectedCount++;
             mapaController.PlayColectedMemory();
             Destroy(other);
         }
@@ -174,7 +181,6 @@ public class PlayerScript : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
-
     }
     private void OnDrawGizmos()
     {
@@ -228,11 +234,9 @@ public class PlayerScript : MonoBehaviour
     }
     private void MovePlayer()
     {
-        Vector3 move = mapaController.startedDialogue ? new Vector3(0, 0, 0) : new Vector3(x * moveSpeed, rb.velocity.y, 0);
-
-        if (!knockUpCountdown)
+        if (!knockUpCountdown || mapaController.startedDialogue)
         {
-            rb.velocity = move;
+            rb.velocity = new Vector3(x * moveSpeed, rb.velocity.y, 0);
         }
         if (mapaController.startedDialogue)
         {
@@ -314,11 +318,11 @@ public class PlayerScript : MonoBehaviour
             currentKnockUpCountdown -= 1 * Time.deltaTime;
             if (transform.rotation.y < 0)
             {
-                rb.velocity = new Vector3(8, 0, 0);
+                rb.velocity = new Vector3(8, rb.velocity.y, 0);
             }
             else
             {
-                rb.velocity = new Vector3(-8, 0, 0);
+                rb.velocity = new Vector3(-8, rb.velocity.y, 0);
             }
         }
         else
@@ -326,6 +330,51 @@ public class PlayerScript : MonoBehaviour
             currentKnockUpCountdown = startKnockUpCountdown;
             knockUpCountdown = false;
             animator.SetBool("knockBack", false);
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        string otherTag = collision.gameObject.tag;
+        if ((otherTag == "EnemyCrab" || otherTag == "CollossoArm" || otherTag == "Collosso") && !attackAnimation)
+        {
+            if (collision.transform.position.x > transform.position.x)
+            {
+                transform.rotation = Quaternion.Euler(0, 90, 0);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0, -90, 0);
+            }
+            knockUpCountdown = true;
+            animator.SetBool("knockBack", true);
+            if (otherTag == "EnemyCrab")
+            {
+                healthBar.TakeDamage(1);
+            }
+            if (otherTag == "CollossoArm")
+            {
+                healthBar.TakeDamage(2);
+            }
+            if (healthBar.currentHealth <= 0)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+        }
+        if (otherTag == "Memory")
+        {
+            mapaController.memoriesColected += 1;
+            mapaController.PlayColectedMemory();
+            Destroy(collision.gameObject);
+        }
+        if (otherTag == "Eco")
+        {
+            mapaController.ecoColectedCount++;
+            mapaController.PlayColectedMemory();
+            Destroy(collision.gameObject);
+        }
+        if (otherTag == "Void")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
     private bool isPlayerInAction()
