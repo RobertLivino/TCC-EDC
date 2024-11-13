@@ -170,7 +170,7 @@ public class PlayerScript : MonoBehaviour
             mapaController.PlayColectedMemory();
             mapaController.memoryImageStatus = true;
         }
-        if(otherTag == "EcoCastle" && otherTag == "EcoDesert")
+        if(otherTag == "EcoCastle" || otherTag == "EcoDesert")
         {
             mapaController.ecoColectedCount++;
             mapaController.PlayColectedMemory();

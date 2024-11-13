@@ -7903,7 +7903,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f1e37fa3ecb07439740b313aa6ddc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  persistenceData: {fileID: 0}
+  persistenceData: {fileID: 11400000, guid: b426c54e68df5a841822aba488ad9572, type: 2}
   healthMana: 0
   healthManaValue: 0
   healthHealt: 0
@@ -12116,6 +12116,18 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c3e9cc703dfbc0f46ae38ae3ddf195f0, type: 3}
       propertyPath: m_Name
       value: Fase_2_Parte_13 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1583002019638663333, guid: c3e9cc703dfbc0f46ae38ae3ddf195f0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2317520876103709964, guid: c3e9cc703dfbc0f46ae38ae3ddf195f0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3555875861395987499, guid: c3e9cc703dfbc0f46ae38ae3ddf195f0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3e9cc703dfbc0f46ae38ae3ddf195f0, type: 3}
