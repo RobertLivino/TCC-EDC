@@ -7,7 +7,7 @@ public class Menu : MonoBehaviour
 {
     public void StartGame()
     {
-        SceneManager.LoadScene("MAPA 1");
+        SceneManager.LoadScene("HUB");
     }
     public void ExitGame()
 
