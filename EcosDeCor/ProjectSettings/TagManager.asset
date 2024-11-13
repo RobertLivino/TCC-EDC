@@ -14,6 +14,8 @@ TagManager:
   - Void
   - Collosso
   - Eco
+  - PortalDesert
+  - PortalCastle
   layers:
   - Default
   - TransparentFX
