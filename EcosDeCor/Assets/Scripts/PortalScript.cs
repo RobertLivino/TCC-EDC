@@ -26,16 +26,16 @@ public class PortalScript : MonoBehaviour
             if (!persistenceData.hasEnterCastle)
             {
                 persistenceData.hasEnterCastle = true;
-                SceneManager.LoadScene("MAPA 1");
             }
+            SceneManager.LoadScene("MAPA 1");
         }
         if (otherTag == "Player" && myTag == "PortalDesert")
         {
             if (!persistenceData.hasEnterDesert)
             {
                 persistenceData.hasEnterDesert = true;
-                SceneManager.LoadScene("MAPA 2");
             }
+            SceneManager.LoadScene("MAPA 2");
         }
         if (otherTag == "Player" && myTag == "PortalFinal")
         {

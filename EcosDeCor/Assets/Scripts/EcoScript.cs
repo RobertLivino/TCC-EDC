@@ -12,7 +12,7 @@ public class EcoScript : MonoBehaviour
     void Start()
     {
         string myTag = gameObject.tag;
-        if ((myTag == "EcoCastle" && persistenceData.collectedCastleEco) || (myTag == "EcoDesert" && persistenceData.collectedCastleEco))
+        if ((myTag == "EcoCastle" && persistenceData.collectedCastleEco) || (myTag == "EcoDesert" && persistenceData.collectedDesertEco))
         {
             noColorFilter.SetActive(false);
             Portal.SetActive(true);
