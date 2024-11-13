@@ -1998,15 +1998,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 718d81d40492a5041a2157736e09e3b4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -39.23443
+      value: -6.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 718d81d40492a5041a2157736e09e3b4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -44.723007
+      value: -45.3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 718d81d40492a5041a2157736e09e3b4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -57.73006
+      value: -79.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 718d81d40492a5041a2157736e09e3b4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2036,6 +2036,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7225913462341486413, guid: 718d81d40492a5041a2157736e09e3b4, type: 3}
+      propertyPath: m_TagString
+      value: EcoDesert
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 718d81d40492a5041a2157736e09e3b4, type: 3}
       propertyPath: m_Name
       value: Fase_2_Eco2
@@ -2047,6 +2051,26 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 718d81d40492a5041a2157736e09e3b4, type: 3}
   m_PrefabInstance: {fileID: 218307126}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &218307128 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -7225913462341486413, guid: 718d81d40492a5041a2157736e09e3b4, type: 3}
+  m_PrefabInstance: {fileID: 218307126}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &218307129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218307128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26097a67c71b5df439c074d42de37d99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noColorFilter: {fileID: 0}
+  Portal: {fileID: 0}
+  persistenceData: {fileID: 11400000, guid: b426c54e68df5a841822aba488ad9572, type: 2}
 --- !u!1 &241353009
 GameObject:
   m_ObjectHideFlags: 0
