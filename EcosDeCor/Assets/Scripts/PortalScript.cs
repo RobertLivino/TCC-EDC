@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PortalScript : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class PortalScript : MonoBehaviour
             if (!persistenceData.hasEnterCastle)
             {
                 persistenceData.hasEnterCastle = true;
+                SceneManager.LoadScene("MAPA 1");
             }
         }
         if (otherTag == "Player" && myTag == "PortalDesert")
@@ -32,6 +34,13 @@ public class PortalScript : MonoBehaviour
             if (!persistenceData.hasEnterDesert)
             {
                 persistenceData.hasEnterDesert = true;
+                SceneManager.LoadScene("MAPA 2");
+            }
+        }
+        if (otherTag == "Player" && myTag == "PortalFinal")
+        {
+            if (!persistenceData.hasEnterDesert && !persistenceData.hasEnterCastle)
+            {
             }
         }
     }
