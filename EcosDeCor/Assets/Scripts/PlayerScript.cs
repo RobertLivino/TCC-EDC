@@ -169,13 +169,11 @@ public class PlayerScript : MonoBehaviour
         {
             mapaController.PlayColectedMemory();
             mapaController.memoryImageStatus = true;
-            Destroy(other);
         }
         if(otherTag == "Eco")
         {
             mapaController.ecoColectedCount++;
             mapaController.PlayColectedMemory();
-            Destroy(other);
         }
         if(otherTag == "Void")
         {
