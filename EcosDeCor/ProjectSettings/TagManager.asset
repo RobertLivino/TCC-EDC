@@ -16,6 +16,7 @@ TagManager:
   - Eco
   - PortalDesert
   - PortalCastle
+  - ReturnToHub
   layers:
   - Default
   - TransparentFX
