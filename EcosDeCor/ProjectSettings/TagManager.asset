@@ -13,10 +13,11 @@ TagManager:
   - CollossoArm
   - Void
   - Collosso
-  - Eco
   - PortalDesert
   - PortalCastle
   - ReturnToHub
+  - EcoDesert
+  - EcoCastle
   layers:
   - Default
   - TransparentFX
