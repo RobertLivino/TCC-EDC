@@ -14,6 +14,9 @@ public class EndGameScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SceneManager.LoadScene("MenuTeste");
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("MenuTeste");
+        }
     }
 }
