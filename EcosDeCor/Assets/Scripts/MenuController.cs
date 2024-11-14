@@ -6,6 +6,7 @@ public class MenuController : MonoBehaviour
 {
     public GameObject imgComandos;
     public GameObject configAudio;
+    public GameObject credits;
     public void MostrarComandos()
     {
         
@@ -16,11 +17,12 @@ public class MenuController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             imgComandos.SetActive(false);
+            credits.SetActive(false);
         }
     }
     public void StartGame()
     {
-        SceneManager.LoadScene("HUB");
+        SceneManager.LoadScene("INTRO");
     }
     public void ExitGame()
     {
@@ -30,5 +32,9 @@ public class MenuController : MonoBehaviour
     public void ConfigSoundGame()
     {
         configAudio.SetActive(true);
+    }
+    public void Credits()
+    {
+        credits.SetActive(true);
     }
 }
