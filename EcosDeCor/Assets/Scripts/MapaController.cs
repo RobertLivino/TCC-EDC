@@ -34,6 +34,7 @@ public class MapaController : MonoBehaviour
 
     //pause
     public GameObject pauseMenu;
+    public GameObject configAudio;
 
     //Audio
     public bool walking;
@@ -86,6 +87,7 @@ public class MapaController : MonoBehaviour
 
         {
             pauseMenu.SetActive(false);
+            configAudio.SetActive(false);
             Time.timeScale = 1;
         }
         else

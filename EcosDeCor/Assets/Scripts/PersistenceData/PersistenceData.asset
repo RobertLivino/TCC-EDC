@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d562f7d649e52e4db3df290f885990c, type: 3}
   m_Name: PersistenceData
   m_EditorClassIdentifier: 
-  ecosColected: 2
-  collectedCastleEco: 1
-  collectedDesertEco: 1
-  hasEnterCastle: 1
-  hasEnterDesert: 1
+  ecosColected: 0
+  collectedCastleEco: 0
+  collectedDesertEco: 0
+  hasEnterCastle: 0
+  hasEnterDesert: 0
   MasterSound: 0
   SFXSound: 0
   MusicSound: 0
