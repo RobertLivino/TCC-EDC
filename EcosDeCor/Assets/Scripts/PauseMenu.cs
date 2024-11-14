@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenu;
+    public GameObject configAudio;
     void Start()
     {
         
@@ -28,5 +29,9 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenu.SetActive(false);
         Time.timeScale = 1;
+    }
+    public void ConfigSoundGame()
+    {
+        configAudio.SetActive(true);
     }
 }
