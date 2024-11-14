@@ -39,7 +39,7 @@ public class PortalScript : MonoBehaviour
         }
         if (otherTag == "Player" && myTag == "PortalFinal")
         {
-            if (!persistenceData.hasEnterDesert && !persistenceData.hasEnterCastle)
+            if (persistenceData.hasEnterDesert && persistenceData.hasEnterCastle)
             {
                 SceneManager.LoadScene("MAPA 3");
             }

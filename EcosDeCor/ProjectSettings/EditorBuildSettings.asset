@@ -23,5 +23,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameMaps/MAPA 2.unity
     guid: 3389a99d8698cd141b8841a79e6b18bd
+  - enabled: 1
+    path: Assets/Scenes/GameMaps/MAPA 3.unity
+    guid: 18861d9afbffe0240b3409a28769ec20
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}
