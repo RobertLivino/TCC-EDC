@@ -93,6 +93,7 @@ public class MapaController : MonoBehaviour
         else
         {
             pauseMenu.SetActive(true);
+            StopWalkAudio();
             Time.timeScale = 0;
         }
     }
