@@ -21,10 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Lava
-  m_Shader: {fileID: -6465566751694194690, guid: 04e5f833877e093489922b3f6797372e,
-    type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
+  m_Shader: {fileID: -6465566751694194690, guid: 04e5f833877e093489922b3f6797372e, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 2
@@ -33,7 +30,6 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -85,9 +81,9 @@ Material:
     - _VoronoiScale: 15
     m_Colors:
     - _BottomRemap: {r: 0.5, g: 1, b: 0, a: 0}
-    - _FresnelColor: {r: 5.960785, g: 2.6527052, b: 1.46679, a: 0}
+    - _FresnelColor: {r: 1, g: 1, b: 1, a: 0}
     - _LavaBackground: {r: 7.958114, g: 7.958114, b: 7.958114, a: 0}
-    - _LavaColor: {r: 4.372362, g: 1.1458604, b: 0, a: 1}
+    - _LavaColor: {r: 6.2494645, g: 6.2494645, b: 6.2494645, a: 1}
     - _LavaNormalSpeed: {r: 0.15, g: 0, b: 0, a: 0}
     - _LavaScale: {r: 10, g: 10, b: 0, a: 0}
     - _LavaScaleNormal: {r: 10, g: 10, b: 0, a: 0}
