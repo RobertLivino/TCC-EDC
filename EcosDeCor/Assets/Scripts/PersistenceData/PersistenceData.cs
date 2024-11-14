@@ -9,6 +9,7 @@ public class PersistenceData : ScriptableObject
     public int ecosColected;
     public bool collectedCastleEco;
     public bool collectedDesertEco;
+    public bool collectedFinalEco;
     public bool hasEnterCastle;
     public bool hasEnterDesert;
     public float MasterSound;

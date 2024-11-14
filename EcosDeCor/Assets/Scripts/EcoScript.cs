@@ -43,5 +43,12 @@ public class EcoScript : MonoBehaviour
             noColorFilter.SetActive(false);
             Destroy(gameObject);
         }
+        if (otherTag == "Player" && myTag == "EcoFinal")
+        {
+            Portal.SetActive(true);
+            persistenceData.collectedFinalEco = true;
+            noColorFilter.SetActive(false);
+            Destroy(gameObject);
+        }
     }
 }

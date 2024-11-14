@@ -48,5 +48,9 @@ public class PortalScript : MonoBehaviour
         {
             SceneManager.LoadScene("HUB");
         }
+        if (otherTag == "Player" && myTag == "PortalEndGame")
+        {
+            SceneManager.LoadScene("ENDGAME");
+        }
     }
 }
