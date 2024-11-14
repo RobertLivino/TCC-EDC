@@ -10592,6 +10592,7 @@ MonoBehaviour:
   blockConversation: 0
   blockConversationCount: 0
   pauseMenu: {fileID: 818349412}
+  configAudio: {fileID: 658581620}
   walking: 0
   playerActions: {fileID: 539708891}
   playerWalk: {fileID: 539708890}

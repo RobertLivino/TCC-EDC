@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.17998362, g: 0.22535199, b: 0.30673265, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5110,6 +5110,7 @@ MonoBehaviour:
   blockConversation: 0
   blockConversationCount: 0
   pauseMenu: {fileID: 2140509512}
+  configAudio: {fileID: 1696042607}
   walking: 0
   playerActions: {fileID: 2132393603}
   playerWalk: {fileID: 2132393607}
