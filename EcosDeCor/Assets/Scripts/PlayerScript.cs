@@ -151,6 +151,7 @@ public class PlayerScript : MonoBehaviour
                 transform.rotation = Quaternion.Euler(0, -90, 0);
             }
             knockUpCountdown = true;
+            mapaController.PlayTakeDamageAudio();
             animator.SetBool("knockBack", true);
             if (otherTag == "EnemyCrab")
             {
