@@ -850,6 +850,8 @@ MonoBehaviour:
     m_Bits: 8
   agent: {fileID: 3135669947233570787}
   MoveSpeed: 3
+  handColider: {fileID: 5901691867985365281}
+  bodyColider: {fileID: 6214620891621742898}
 --- !u!195 &3135669947233570787
 NavMeshAgent:
   m_ObjectHideFlags: 0

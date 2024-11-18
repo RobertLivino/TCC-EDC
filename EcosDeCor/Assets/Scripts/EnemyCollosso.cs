@@ -14,6 +14,8 @@ public class EnemyCollosso : MonoBehaviour
     public NavMeshAgent agent;
     private Animator animator;
     public float MoveSpeed;
+    public Collider handColider;
+    public Collider bodyColider;
     // Start is called before the first frame update
     void Start()
     {
@@ -101,5 +103,10 @@ public class EnemyCollosso : MonoBehaviour
     public void Die()
     {
         Destroy(gameObject);
+    }
+    public void RemoveColider()
+    {
+        handColider.enabled = false;
+        bodyColider.enabled = false;
     }
 }
