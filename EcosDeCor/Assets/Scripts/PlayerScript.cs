@@ -154,11 +154,11 @@ public class PlayerScript : MonoBehaviour
             animator.SetBool("knockBack", true);
             if (otherTag == "EnemyCrab")
             {
-                healthBar.TakeDamage(0.1f);
+                healthBar.TakeDamage(0.3f);
             }
             if (otherTag == "CollossoArm")
             {
-                healthBar.TakeDamage(0.8f);
+                healthBar.TakeDamage(0.3f);
             }
             if (healthBar.currentHealth <= 0)
             {
