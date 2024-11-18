@@ -133,4 +133,12 @@ public class MapaController : MonoBehaviour
         playerActions.clip = jumpDownAudioPlayer;
         playerActions.Play();
     }
+    public void PlayCrabAttack()
+    {
+        crabActions.Play();
+    }
+    public void PlayCollossoAttack()
+    {
+        collossoActions.Play();
+    }
 }

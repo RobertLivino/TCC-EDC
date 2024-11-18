@@ -100,6 +100,10 @@ public class EnemyCollosso : MonoBehaviour
     {
         animator.SetBool("Attack", false);
     }
+    public void PlaySoundAttack()
+    {
+        mapaController.PlayCollossoAttack();
+    }
     public void Die()
     {
         Destroy(gameObject);
