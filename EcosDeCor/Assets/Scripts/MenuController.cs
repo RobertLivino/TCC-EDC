@@ -18,6 +18,7 @@ public class MenuController : MonoBehaviour
         {
             imgComandos.SetActive(false);
             credits.SetActive(false);
+            configAudio.SetActive(false);
         }
     }
     public void StartGame()
