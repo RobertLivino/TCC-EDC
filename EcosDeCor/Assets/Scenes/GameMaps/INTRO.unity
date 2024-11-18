@@ -288,7 +288,7 @@ MonoBehaviour:
     vida ao que foi esquecido."
   - "Sua jornada come\xE7a agora, e com ela, a esperan\xE7a de um mundo colorido
     novamente."
-  textSpeed: 0.2
+  textSpeed: 0.1
 --- !u!114 &1350581818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -797,7 +797,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Pressione "W" para pular
+  m_text: Pressione "W" para continuar
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: de425833d0d7ff24490188137faf550e, type: 2}
   m_sharedMaterial: {fileID: -3553291336721169103, guid: de425833d0d7ff24490188137faf550e, type: 2}
