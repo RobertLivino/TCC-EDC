@@ -45,6 +45,7 @@ public class MapaController : MonoBehaviour
     public AudioSource bossActions;
     public AudioClip colectedAudioPlayer;
     public AudioClip attackAudioPlayer;
+    public AudioClip takeDamageAudioPlayer;
     public AudioClip spellAudioPlayer;
     public AudioClip walkAudioPlayer;
     public AudioClip jumpUpAudioPlayer;
@@ -107,6 +108,11 @@ public class MapaController : MonoBehaviour
         playerActions.clip = attackAudioPlayer;
         playerActions.Play();
     }
+    public void PlayTakeDamageAudio()
+    {
+        playerActions.clip = takeDamageAudioPlayer;
+        playerActions.Play();
+    }
     public void PlaySpellAudio()
     {
         playerActions.clip = spellAudioPlayer;
@@ -132,5 +138,13 @@ public class MapaController : MonoBehaviour
     {
         playerActions.clip = jumpDownAudioPlayer;
         playerActions.Play();
+    }
+    public void PlayCrabAttack()
+    {
+        crabActions.Play();
+    }
+    public void PlayCollossoAttack()
+    {
+        collossoActions.Play();
     }
 }
