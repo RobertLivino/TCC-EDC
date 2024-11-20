@@ -17,12 +17,19 @@ public class DesertPortalAlertScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (persistenceData.hasEnterCastle && persistenceData.hasEnterDesert)
+        {
+            alertText.text = "O último guardião o espera";
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(!persistenceData.hasEnterCastle)
+        {
+            alertBox.SetActive(true);
+        }
+        if(persistenceData.hasEnterCastle && persistenceData.hasEnterDesert)
         {
             alertBox.SetActive(true);
         }

@@ -43,7 +43,7 @@ public class PlayerScript : MonoBehaviour
     private float jumpCount;
     private float jumpTime = 0.4f;
     private float jumpMultplier = 1.3f;
-    private int jumpPower = 8;
+    private float jumpPower = 5f;
     public float fallMultiplayer = 0.001f;
     public Vector3 vecGravity;
 
@@ -77,11 +77,11 @@ public class PlayerScript : MonoBehaviour
             JumpPlayer();
         }
 
-        if (Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKeyDown(KeyCode.J) || Input.GetKeyDown(KeyCode.X))
         {
             PlayerAttack();
         }
-        if (Input.GetKeyDown(KeyCode.K) && manaBar.currentMana > 0)
+        if ((Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.C)) && manaBar.currentMana > 0)
         {
             PlayerCastSpell();
         }
