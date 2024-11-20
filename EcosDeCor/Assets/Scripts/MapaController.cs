@@ -55,7 +55,6 @@ public class MapaController : MonoBehaviour
     {
         healthMana = false;
         memoriesColected = 0;
-        ecoColectedCount = persistenceData.ecosColected;
         guardianRange = false;
         guardianDoor = true;
         blockConversation = false;
@@ -63,7 +62,7 @@ public class MapaController : MonoBehaviour
     }
     void Update()
     {
-        persistenceData.ecosColected = ecoColectedCount;
+        ecoColectedCount = persistenceData.ecosColected;
         memoriesCristalColected.text = ecoColectedCount.ToString();
         if (Input.GetKeyDown(KeyCode.Escape))
         {

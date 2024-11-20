@@ -12,6 +12,7 @@ using UnityEngine.UIElements;
 public class PlayerScript : MonoBehaviour
 {
     public MapaController mapaController;
+    public PersistenceData persistenceData;
 
     private float moveSpeed = 12f;
     private float x;
@@ -173,7 +174,7 @@ public class PlayerScript : MonoBehaviour
         }
         if(otherTag == "EcoCastle" || otherTag == "EcoDesert" || otherTag == "EcoFinal")
         {
-            mapaController.ecoColectedCount++;
+            persistenceData.ecosColected++;
             mapaController.PlayColectedMemory();
         }
         if(otherTag == "Void")
