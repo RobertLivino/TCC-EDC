@@ -1392,7 +1392,7 @@ MonoBehaviour:
   SpellPointCast: {fileID: 1717993022088566294}
   SpellDestination: {x: 0, y: 0, z: 0}
   spellToCast: {fileID: 2624209793632289999, guid: 870853d28a647bc45b09525169aec33b, type: 3}
-  spellSpeed: 5
+  spellSpeed: 10
   spellDamage: 2
 --- !u!1 &6796084987740961092
 GameObject:

@@ -28,6 +28,7 @@ public class PlayerScript : MonoBehaviour
     private Animator animator;
     public bool attackAnimation;
     public bool hittedOnce;
+    public Collider Sword;
     public float swordDamage = 1;
 
     public GameObject SpellPointCast;
@@ -45,7 +46,7 @@ public class PlayerScript : MonoBehaviour
     private float jumpTime = 0.4f;
     private float jumpMultplier = 1.3f;
     private float jumpPower = 5f;
-    public float fallMultiplayer = 0.001f;
+    public float fallMultiplayer = 0.1f;
     public Vector3 vecGravity;
 
     //public CharacterController controller;
@@ -197,11 +198,12 @@ public class PlayerScript : MonoBehaviour
     }
     private void OnHitted()
     {
-        mapaController.PlayAttackAudio();
         hittedOnce = true;
+        Sword.enabled = true;
     }
     private void OnFinishHit()
     {
+        Sword.enabled = false;
         hittedOnce = false;
     }
     private void OnFinishSpell()
@@ -269,6 +271,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (isPlayerInAction())
         {
+            mapaController.PlayAttackAudio();
             animator.SetBool("Attack", true);
         }
     }
