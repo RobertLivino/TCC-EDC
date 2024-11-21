@@ -65,7 +65,7 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        x = Input.GetAxis("Horizontal");
+        x = mapaController.startedDialogue ? 0 : Input.GetAxis("Horizontal");
 
         MovePlayer();
 
@@ -74,7 +74,7 @@ public class PlayerScript : MonoBehaviour
             RotatePlayer();
         }
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && !mapaController.startedDialogue)
         {
             JumpPlayer();
         }
@@ -236,7 +236,7 @@ public class PlayerScript : MonoBehaviour
     }
     private void MovePlayer()
     {
-        if (!knockUpCountdown || mapaController.startedDialogue)
+        if (!knockUpCountdown)
         {
             rb.velocity = new Vector3(x * moveSpeed, rb.velocity.y, 0);
         }

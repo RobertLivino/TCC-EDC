@@ -16,7 +16,7 @@ MonoBehaviour:
   collectedCastleEco: 0
   collectedDesertEco: 0
   collectedFinalEco: 0
-  hasEnterCastle: 1
+  hasEnterCastle: 0
   hasEnterDesert: 0
   MasterSound: 0
   SFXSound: 0
