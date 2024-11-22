@@ -3067,7 +3067,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Jos\xE9 Willian Pinto Gomes"
+  m_text: "Jos\xE9 William Pinto Gomes"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: de425833d0d7ff24490188137faf550e, type: 2}
   m_sharedMaterial: {fileID: -3553291336721169103, guid: de425833d0d7ff24490188137faf550e, type: 2}
@@ -4660,7 +4660,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1509913482
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6899,8 +6899,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Este jogo foi desenvolvido como parte das exig\xEAncias para a obten\xE7\xE3o
     do titulo de Tecn\xF3logo em Jogos Digitais pela Faculdade de Tecnologia de Americana
-    (Fatec Americana). Seus autores o disponibilizam livre de direitos autorais para
-    fins n\xE3o comerciais."
+    \"Ministro Ralph Biasi\". Seus autores o disponibilizam livre de direitos autorais
+    para fins n\xE3o comerciais."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: de425833d0d7ff24490188137faf550e, type: 2}
   m_sharedMaterial: {fileID: -3553291336721169103, guid: de425833d0d7ff24490188137faf550e, type: 2}
