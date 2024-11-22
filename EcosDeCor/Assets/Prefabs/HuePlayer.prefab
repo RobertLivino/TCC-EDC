@@ -261,7 +261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapaController: {fileID: 0}
-  persistenceData: {fileID: 0}
+  persistenceData: {fileID: 11400000, guid: b426c54e68df5a841822aba488ad9572, type: 2}
   healthBar: {fileID: 1917072530733723534}
   manaBar: {fileID: 1917072530737474946}
   playerSword: {fileID: 1917072531599377994}

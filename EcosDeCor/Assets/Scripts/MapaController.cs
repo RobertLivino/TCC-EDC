@@ -59,6 +59,7 @@ public class MapaController : MonoBehaviour
         guardianDoor = true;
         blockConversation = false;
         blockConversationCount = 0;
+        ecoColectedCount = persistenceData.ecosColected;
     }
     void Update()
     {
