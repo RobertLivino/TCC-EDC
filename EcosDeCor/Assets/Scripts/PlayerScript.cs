@@ -175,7 +175,7 @@ public class PlayerScript : MonoBehaviour
         }
         if(otherTag == "EcoCastle" || otherTag == "EcoDesert" || otherTag == "EcoFinal")
         {
-            persistenceData.ecosColected++;
+            persistenceData.ecosColected += 1;
             mapaController.PlayColectedMemory();
         }
         if(otherTag == "Void")
