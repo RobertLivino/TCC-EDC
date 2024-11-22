@@ -12285,8 +12285,8 @@ MonoBehaviour:
   bossActions: {fileID: 539708887}
   colectedAudioPlayer: {fileID: 8300000, guid: 614a8d54e54f5984991b21371b96c1f2, type: 3}
   attackAudioPlayer: {fileID: 8300000, guid: a8e5a1fd42ff36e47b825c7b3573ee06, type: 3}
-  takeDamageAudioPlayer: {fileID: 0}
-  spellAudioPlayer: {fileID: 8300000, guid: d4aec8eaa0efb994a863952a0f0680ee, type: 3}
+  takeDamageAudioPlayer: {fileID: 8300000, guid: a05d9d94c448b9147ad4fea84ce15902, type: 3}
+  spellAudioPlayer: {fileID: 8300000, guid: ced290f5f2e10ce4c979a03ab12d6e2e, type: 3}
   walkAudioPlayer: {fileID: 8300000, guid: 15f792b57294b5b49bcdb228d418ef4c, type: 3}
   jumpUpAudioPlayer: {fileID: 8300000, guid: 2d953b491f952134a84c6475f037bd87, type: 3}
   jumpDownAudioPlayer: {fileID: 8300000, guid: fc70eb7dbc8ff8f449ae8649d331aa76, type: 3}
