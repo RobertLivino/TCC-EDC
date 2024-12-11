@@ -60,6 +60,8 @@ sysinfo.txt
 *.aab
 *.unitypackage
 *.app
+*.zip
+EcosDeCor\Build.zip
 
 # Crashlytics generated file
 crashlytics-build.properties

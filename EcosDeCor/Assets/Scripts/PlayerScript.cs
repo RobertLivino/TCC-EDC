@@ -1,56 +1,363 @@
+using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class PlayerScript : MonoBehaviour
 {
-    private bool lookUp;
-    private bool lookDown;
-    private float moveSpeed = 12f;
-    private float gravity = -19.81f;
+    public MapaController mapaController;
+    public PersistenceData persistenceData;
 
-    Vector3 velocity;
+    private float moveSpeed = 12f;
+    private float x;
+
+    private bool knockUpCountdown = false;
+    private float startKnockUpCountdown = 0.5f;
+    private float currentKnockUpCountdown = 0.5f;
+
+    public HealthBar healthBar;
+    public ManaBar manaBar;
+    public PlayerSword playerSword;
+
+    private Animator animator;
+    public bool attackAnimation;
+    public bool hittedOnce;
+    public Collider Sword;
+    public float swordDamage = 1;
+
+    public GameObject SpellPointCast;
+    public Vector3 SpellDestination;
+    public GameObject spellToCast;
+    public float spellSpeed;
+    public float spellDamage = 2;
 
     public Transform groundCheck;
-    private float groundDistance = 0.4f;
+    private float groundDistance = 0.5f;
     public LayerMask groundMask;
-    bool isGrounded;
-    private float jumpHeight = 3f;
+    private bool isGrounded;
+    private bool isJumping;
+    private float jumpCount;
+    private float jumpTime = 0.4f;
+    private float jumpMultplier = 1.3f;
+    private float jumpPower = 5f;
+    public float fallMultiplayer = 0.1f;
+    public Vector3 vecGravity;
 
-    public CharacterController controller;
-    // Start is called before the first frame update
+    //public CharacterController controller;
+    private Rigidbody rb;
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
+        healthBar.FillHealthStart(5f);
+        manaBar.FillManaStart(50f);
+        spellDamage = 2f;
+        swordDamage = 1f;
+        rb = GetComponent<Rigidbody>();
+        vecGravity = new Vector3(0, -Physics.gravity.y, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        x = mapaController.startedDialogue ? 0 : Input.GetAxis("Horizontal");
 
-        //if (isGrounded && velocity.y < 0)
-        //{
-        //    velocity.y = -2f;
-        //}
+        MovePlayer();
 
-        float x = Input.GetAxis("Horizontal");
-        float y = Input.GetAxis("Vertical");
-
-        lookUp = y > 0 ? true : false;
-        lookDown = y < 0 ? true : false;
-
-        Vector3 move =  new Vector3(x, 0, 0);
-        controller.Move(move * moveSpeed * Time.deltaTime);
-
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (isPlayerInAction() && !knockUpCountdown)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            RotatePlayer();
         }
 
-        velocity.y += gravity * Time.deltaTime;
+        if (Input.GetButtonDown("Jump") && !mapaController.startedDialogue)
+        {
+            JumpPlayer();
+        }
 
-        controller.Move(velocity * Time.deltaTime);
+        if (Input.GetKeyDown(KeyCode.J) || Input.GetKeyDown(KeyCode.X))
+        {
+            PlayerAttack();
+        }
+        if ((Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.C)) && manaBar.currentMana > 0)
+        {
+            PlayerCastSpell();
+        }
+
+        if (knockUpCountdown)
+        {
+            UpdateKnockUpCountdown();
+        }
+
+        if (mapaController.healthMana)
+        {
+            HealManaByEnemy(mapaController.healthManaValue);
+        }
+        if (mapaController.healthHealt)
+        {
+            HealHealthByEnemy(mapaController.healthHealtValue);
+        }
+        if (Input.GetKeyDown(KeyCode.W) && !mapaController.blockConversation)
+        {
+            GuardianConversetion();
+        }
+        
+        if (Input.GetKeyDown(KeyCode.W) && mapaController.blockConversation && !mapaController.startedDialogue)
+        {
+            mapaController.blockConversationCount++;
+            if (mapaController.blockConversationCount > 1)
+            {
+                mapaController.blockConversationCount = 0;
+                mapaController.blockConversation = false;
+            }
+        }
+
+        UpdateGravity();    
+    }
+
+    private void FixedUpdate()
+    {
+        if (transform.position.z != -1.3)
+        {
+            transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y, -1.3f), transform.rotation);
+        }
+        attackAnimation = animator.GetBool("Attack");
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        animator.SetBool("IsGrounded", isGrounded);
+
+        if (isGrounded && rb.velocity.y < 0)
+        {
+            animator.SetInteger("jumpState", 0);
+        }
+        if (!isGrounded && animator.GetInteger("jumpState") != 2)
+        {
+            animator.SetInteger("jumpState", 2);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        string otherTag = other.gameObject.tag;
+        if ((otherTag == "EnemyCrab" || otherTag == "CollossoArm" || otherTag == "Collosso") && !attackAnimation)
+        {
+            if (other.transform.position.x > transform.position.x)
+            {
+                transform.rotation = Quaternion.Euler(0, 90, 0);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0, -90, 0);
+            }
+            knockUpCountdown = true;
+            mapaController.PlayTakeDamageAudio();
+            animator.SetBool("knockBack", true);
+            if (otherTag == "EnemyCrab")
+            {
+                healthBar.TakeDamage(0.3f);
+            }
+            if (otherTag == "CollossoArm")
+            {
+                healthBar.TakeDamage(0.3f);
+            }
+            if (healthBar.currentHealth <= 0)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+        }
+        if(otherTag == "Memory")
+        {
+            mapaController.PlayColectedMemory();
+            mapaController.memoryImageStatus = true;
+        }
+        if(otherTag == "EcoCastle" || otherTag == "EcoDesert" || otherTag == "EcoFinal")
+        {
+            persistenceData.ecosColected += 1;
+            mapaController.PlayColectedMemory();
+        }
+        if(otherTag == "Void")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(groundCheck.position, groundDistance);
+    }
+    //Triggers
+    private void OnFinishedAscend()
+    {
+        animator.SetTrigger("jumpAscendFinished");
+    }
+    private void OnFinishedAttack()
+    {
+        animator.SetBool("Attack", false);
+    }
+    private void OnHitted()
+    {
+        hittedOnce = true;
+        Sword.enabled = true;
+    }
+    private void OnFinishHit()
+    {
+        Sword.enabled = false;
+        hittedOnce = false;
+    }
+    private void OnFinishSpell()
+    {
+        animator.SetBool("Spell", false);
+    }
+    private void OnCastSpell()
+    {
+        var SpellObj = Instantiate(spellToCast, SpellPointCast.transform.position, Quaternion.identity) as GameObject;
+        SpellObj.GetComponent<Rigidbody>().velocity = SpellPointCast.transform.forward.normalized * spellSpeed;
+        mapaController.PlaySpellAudio();
+        Destroy(SpellObj, 15f);
+    }
+    private void PlayJumpDescend()
+    {
+        mapaController.PlayJumpDownAudio();
+    }
+
+    //metodos
+    private void RotatePlayer()
+    {
+        if (x < 0 && transform.rotation.y != -90)
+        {
+            transform.rotation = Quaternion.Euler(0, -90, 0);
+        }
+        if (x > 0 && transform.rotation.y != 90)
+        {
+            transform.rotation = Quaternion.Euler(0, 90, 0);
+        }
+    }
+    private void MovePlayer()
+    {
+        if (!knockUpCountdown)
+        {
+            rb.velocity = new Vector3(x * moveSpeed, rb.velocity.y, 0);
+        }
+        if (mapaController.startedDialogue)
+        {
+            x = 0;
+        }
+
+        moveSpeed = isGrounded ? 12f : 10f;
+        if (x != 0 && isGrounded)
+        {
+            if (!mapaController.walking) mapaController.PlayWalkAudio();
+            animator.SetBool("move", true);
+        }
+        else
+        {
+            mapaController.StopWalkAudio();
+            animator.SetBool("move", false);
+        }
+    }
+    private void JumpPlayer()
+    {
+        if (isGrounded)
+        {
+            isJumping = true;
+            jumpCount = 0;
+            mapaController.PlayJumpUpAudio();
+            rb.velocity = new Vector3(rb.velocity.x, jumpPower, 0);
+        }
+    }
+    private void PlayerAttack()
+    {
+        if (isPlayerInAction())
+        {
+            mapaController.PlayAttackAudio();
+            animator.SetBool("Attack", true);
+        }
+    }
+    private void PlayerCastSpell()
+    {
+        if (isPlayerInAction())
+        {
+            manaBar.useMana(10f);
+            animator.SetBool("Spell", true);
+        }
+    }
+    private void UpdateGravity()
+    {
+        if (rb.velocity.y > 0 && isJumping)
+        {
+            jumpCount += Time.deltaTime;
+            if (jumpCount > jumpTime) isJumping = false;
+
+            float t = jumpCount / jumpTime;
+            float currentjump = jumpMultplier;
+
+            if (t > 0.5)
+            {
+                currentjump = jumpMultplier * (1 - t);
+            }
+            rb.velocity += vecGravity * jumpMultplier * Time.deltaTime;
+        }
+        if (Input.GetButtonUp("Jump"))
+        {
+            isJumping = false;
+            jumpCount = 0;
+
+            if (rb.velocity.y > 0)
+            {
+                rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y * 0.6f, 0);
+            }
+        }
+        if (rb.velocity.y < 0)
+        {
+            rb.velocity -= vecGravity * fallMultiplayer * Time.deltaTime;
+        }
+    }
+    private void UpdateKnockUpCountdown()
+    {
+        if (currentKnockUpCountdown > 0)
+        {
+            currentKnockUpCountdown -= 1 * Time.deltaTime;
+            if (transform.rotation.y < 0)
+            {
+                rb.velocity = new Vector3(8, rb.velocity.y, 0);
+            }
+            else
+            {
+                rb.velocity = new Vector3(-8, rb.velocity.y, 0);
+            }
+        }
+        else
+        {
+            currentKnockUpCountdown = startKnockUpCountdown;
+            knockUpCountdown = false;
+            animator.SetBool("knockBack", false);
+        }
+    }
+    private bool isPlayerInAction()
+    {
+        if(!animator.GetBool("Attack") && !animator.GetBool("Spell"))
+        {
+            return true;
+        }
+        return false;
+    }
+    private void GuardianConversetion()
+    {
+        if (mapaController.guardianRange && mapaController.guardianDoor && !mapaController.startedDialogue)
+        {
+            mapaController.startedDialogue = true;
+        }
+    }
+    public void HealManaByEnemy(float heal) 
+    {
+        mapaController.healthMana = false;
+        manaBar.HealMana(heal > manaBar.maxMana ? manaBar.maxMana - manaBar.currentMana : heal);
+    }
+    public void HealHealthByEnemy(float heal) 
+    {
+        mapaController.healthHealt = false;
+        healthBar.HealDamage(heal > healthBar.maxHealth ? healthBar.maxHealth - healthBar.currentHealth : heal);
     }
 }

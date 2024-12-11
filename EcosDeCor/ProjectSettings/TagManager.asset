@@ -5,11 +5,28 @@ TagManager:
   serializedVersion: 2
   tags:
   - CinemachineTarget
+  - Ground
+  - EnemyCrab
+  - Spell
+  - Memory
+  - Sword
+  - CollossoArm
+  - Void
+  - Collosso
+  - PortalDesert
+  - PortalCastle
+  - ReturnToHub
+  - EcoDesert
+  - EcoCastle
+  - Eco
+  - PortalFinal
+  - EcoFinal
+  - PortalEndGame
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - player
   - Water
   - UI
   - Ground

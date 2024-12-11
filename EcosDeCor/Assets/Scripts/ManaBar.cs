@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class ManaBar : MonoBehaviour
 {
     public Image manaBar;
-    public float maxMana = 100f;
-    private float currentMana;
+    public float maxMana;
+    public float currentMana;
 
     void Start()
     {
@@ -17,18 +17,12 @@ public class ManaBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentMana < 0)
-        {
-            Application.LoadLevel(Application.loadedLevel);
-        }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            useMana(10);
-        }
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            HealMana(10);
-        }
+    }
+
+    public void FillManaStart(float update)
+    {
+        maxMana = update;
+        currentMana = maxMana;
     }
     public void useMana(float damage)
     {
@@ -38,7 +32,8 @@ public class ManaBar : MonoBehaviour
 
     public void HealMana(float heal)
     {
-        currentMana += heal;
+        float totalFill = heal + currentMana;
+        currentMana = totalFill > maxMana ? maxMana : totalFill;
 
         manaBar.fillAmount = currentMana / maxMana;
     }
